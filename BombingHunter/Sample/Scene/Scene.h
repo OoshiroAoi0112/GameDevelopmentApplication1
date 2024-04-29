@@ -3,12 +3,11 @@
 #include <vector>
 #include <string>
 #include "../Objects/GameObject.h"
-//#include "../Utility/Vector2D.h"
 
 class Scene
 {
 private:
-	std::vector<GameObject*>abjects;
+	std::vector<GameObject*>objects;
 
 public:
 	Scene();
@@ -25,7 +24,7 @@ private:
 	T* CreateObject(const Vector2D& location)
 	{
 		//指定したクラスを生成する
-		t* new_instance = new T();
+		T* new_instance = new T();
 
 		//GameObjectクラスを継承しているか確認
 		GameObject* new_object = dynamic_cast<GameObject*>(new_instance);
@@ -40,7 +39,7 @@ private:
 		//初期化処理
 		new_object->Initialize();
 		//位置情報の設定
-		new_object0 > SetLocation(location);
+		new_object-> SetLocation(location);
 
 		//オブジェクトリストに追加
 		objects.push_back(new_object);

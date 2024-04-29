@@ -145,6 +145,67 @@
     <ClInclude Include="Utility\InputControl.h" />
     <ClInclude Include="Utility\Vector2D.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resource\Sounds\bishi.wav" />
+    <Media Include="Resource\Sounds\Boss_gahee.wav" />
+    <Media Include="Resource\Sounds\Evaluation\BGM_arrows.wav" />
+    <Media Include="Resource\Sounds\Evaluation\BGM_timeup.wav" />
+    <Media Include="Resource\Sounds\Evaluation\SE_bad.wav" />
+    <Media Include="Resource\Sounds\Evaluation\SE_good.wav" />
+    <Media Include="Resource\Sounds\Evaluation\SE_ok.wav" />
+    <Media Include="Resource\Sounds\Evaluation\SE_perfect.wav" />
+    <Media Include="Resource\Sounds\explosion.wav" />
+    <Media Include="Resource\Sounds\Meow.wav" />
+    <Media Include="Resource\Sounds\pan.wav" />
+    <Media Include="Resource\Sounds\pokan.wav" />
+    <Media Include="Resource\Sounds\pop.wav" />
+    <Media Include="Resource\Sounds\teki_gahee.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Images\Blast\1.png" />
+    <Image Include="Resource\Images\Blast\2.png" />
+    <Image Include="Resource\Images\Blast\3.png" />
+    <Image Include="Resource\Images\Bomb\爆弾.png" />
+    <Image Include="Resource\Images\BoxEnemy\1 (1).png" />
+    <Image Include="Resource\Images\BoxEnemy\2.png" />
+    <Image Include="Resource\Images\EnemyBullet\1 (1).png" />
+    <Image Include="Resource\Images\EnemyBullet\eff1.png" />
+    <Image Include="Resource\Images\EnemyBullet\eff2.png" />
+    <Image Include="Resource\Images\EnemyBullet\eff3.png" />
+    <Image Include="Resource\Images\Evaluation\BAD.png" />
+    <Image Include="Resource\Images\Evaluation\GOOD.png" />
+    <Image Include="Resource\Images\Evaluation\OK.png" />
+    <Image Include="Resource\Images\Evaluation\Perfect.png" />
+    <Image Include="Resource\Images\GoldEnemy\1 (1).png" />
+    <Image Include="Resource\Images\GoldEnemy\2.png" />
+    <Image Include="Resource\Images\GoldEnemy\3.png" />
+    <Image Include="Resource\Images\GoldEnemy\4.png" />
+    <Image Include="Resource\Images\GoldEnemy\5.png" />
+    <Image Include="Resource\Images\Harpy\1.png" />
+    <Image Include="Resource\Images\Harpy\2.png" />
+    <Image Include="Resource\Images\TimeLimit\timer-03.png" />
+    <Image Include="Resource\Images\Tri-pilot\飛ぶ1.png" />
+    <Image Include="Resource\Images\Tri-pilot\飛ぶ2.png" />
+    <Image Include="Resource\Images\WingEnemy\1.png" />
+    <Image Include="Resource\Images\WingEnemy\2.png" />
+    <Image Include="Resource\Images\背景2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\Images\Evaluation\Finish.svg" />
+    <None Include="Resource\Images\FlyText\フライテキスト.sprite3" />
+    <None Include="Resource\Images\Score\0.svg" />
+    <None Include="Resource\Images\Score\1.svg" />
+    <None Include="Resource\Images\Score\2.svg" />
+    <None Include="Resource\Images\Score\3.svg" />
+    <None Include="Resource\Images\Score\4.svg" />
+    <None Include="Resource\Images\Score\5.svg" />
+    <None Include="Resource\Images\Score\6.svg" />
+    <None Include="Resource\Images\Score\7.svg" />
+    <None Include="Resource\Images\Score\8.svg" />
+    <None Include="Resource\Images\Score\9.svg" />
+    <None Include="Resource\Images\Score\font-21.svg" />
+    <None Include="Resource\Images\Score\hs.svg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

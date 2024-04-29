@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-#include "../Object/Player/Player.h"
+#include "../Objects/Player/Player.h"
 
 //コンストラクタ
 Scene::Scene() :objects()

@@ -18,5 +18,172 @@
     <ClCompile Include="AppMain.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Utility\InputControl.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\Vector2D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\GameObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\images\Enemy\E_Bullet\eff1.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\E_Bullet\eff2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\E_Bullet\eff3.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\gold\1 %281%29.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\gold\5.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\gold\3.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\gold\2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\gold\4.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\hane\1.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\hane\2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\harpy\1.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\harpy\2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\hako\2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\hako\1 %281%29.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Enemy\E_Bullet\1 %281%29.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Player\P_Bullet\1.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Player\P_Bullet\2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Player\P_Bullet\3.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Player\P_Bullet\爆弾.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Player\飛ぶ1.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Player\飛ぶ2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\result\BAD.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\result\OK.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\result\Perfect.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\result\GOOD.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\Stage\背景2.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\images\timer\timer-03.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\images\number\0.svg" />
+    <None Include="Resource\images\number\1.svg" />
+    <None Include="Resource\images\number\2.svg" />
+    <None Include="Resource\images\number\3.svg" />
+    <None Include="Resource\images\number\5.svg" />
+    <None Include="Resource\images\number\4.svg" />
+    <None Include="Resource\images\number\6.svg" />
+    <None Include="Resource\images\number\8.svg" />
+    <None Include="Resource\images\number\9.svg" />
+    <None Include="Resource\images\number\7.svg" />
+    <None Include="Resource\images\number\フライテキスト.sprite3" />
+    <None Include="Resource\images\result\Finish.svg" />
+    <None Include="Resource\images\score\font-21.svg" />
+    <None Include="Resource\images\score\hs.svg" />
+    <None Include="Resource\sounds\Enemy\gold\金のテキ.sprite3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resource\sounds\Enemy\E_Bullet\bishi.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Enemy\hako\Boss_gahee.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Enemy\hane\teki_gahee.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Enemy\harpy\pokan.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Player\P_Bullet\explosion.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Player\P_Bullet\pan.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Player\P_Bullet\ポップ.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Player\ニャー.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Result\BGM_arrows.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Result\BGM_timeup.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Result\SE_good.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Result\SE_bad.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Result\SE_perfect.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Result\SE_ok.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="Resource\sounds\Stage\ポップ.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utility\InputControl.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Vector2D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\GameObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

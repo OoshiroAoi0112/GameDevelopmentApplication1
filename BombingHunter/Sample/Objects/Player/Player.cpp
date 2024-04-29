@@ -19,13 +19,13 @@ Player::~Player()
 void Player::Initialize()
 {
 	//画像の読み込み
-	animation[0] = LoadGraph("Resource/Images/Tri-pilot/1.png");
-	animation[1] = LoadGraph("Resource/Images/Tri-pilot/2.png");
+	animation[0] = LoadGraph("Resource/Images/Tri-pilot/飛ぶ1.png");
+	animation[1] = LoadGraph("Resource/Images/Tri-pilot/飛ぶ2.png");
 
 	//エラーチェック
 	if (animation[0] == -1 || animation[1] == -1)
 	{
-		throw("鳥ぴろっとの画像がありません\n");
+		throw("鳥パイロットの画像がありません\n");
 	}
 
 	//向きの設定
