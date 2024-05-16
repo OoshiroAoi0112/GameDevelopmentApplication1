@@ -33,6 +33,9 @@
     <ClCompile Include="Objects\Player\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Enemy\Enemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility\InputControl.h">
@@ -48,6 +51,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Player\Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Enemy\Enemy.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -111,7 +117,7 @@
     <Image Include="Resource\Images\Bomb\爆弾.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\Images\BoxEnemy\1 (1).png">
+    <Image Include="Resource\Images\BoxEnemy\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
     <Image Include="Resource\Images\BoxEnemy\2.png">

@@ -27,105 +27,111 @@
     <ClCompile Include="Objects\GameObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Enemy\Enemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resource\images\Enemy\E_Bullet\eff1.png">
+    <Image Include="Resource\Images\Enemy\E_Bullet\eff1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\E_Bullet\eff2.png">
+    <Image Include="Resource\Images\Enemy\E_Bullet\eff2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\E_Bullet\eff3.png">
+    <Image Include="Resource\Images\Enemy\E_Bullet\eff3.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\gold\1 %281%29.png">
+    <Image Include="Resource\Images\Enemy\gold\1 %281%29.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\gold\5.png">
+    <Image Include="Resource\Images\Enemy\gold\5.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\gold\3.png">
+    <Image Include="Resource\Images\Enemy\gold\3.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\gold\2.png">
+    <Image Include="Resource\Images\Enemy\gold\2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\gold\4.png">
+    <Image Include="Resource\Images\Enemy\gold\4.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\hane\1.png">
+    <Image Include="Resource\Images\Enemy\hane\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\hane\2.png">
+    <Image Include="Resource\Images\Enemy\hane\2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\harpy\1.png">
+    <Image Include="Resource\Images\Enemy\harpy\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\harpy\2.png">
+    <Image Include="Resource\Images\Enemy\harpy\2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\hako\2.png">
+    <Image Include="Resource\Images\Enemy\hako\2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\hako\1 %281%29.png">
+    <Image Include="Resource\Images\Enemy\hako\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Enemy\E_Bullet\1 %281%29.png">
+    <Image Include="Resource\Images\Enemy\E_Bullet\1 %281%29.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Player\P_Bullet\1.png">
+    <Image Include="Resource\Images\Player\P_Bullet\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Player\P_Bullet\2.png">
+    <Image Include="Resource\Images\Player\P_Bullet\2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Player\P_Bullet\3.png">
+    <Image Include="Resource\Images\Player\P_Bullet\3.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Player\P_Bullet\爆弾.png">
+    <Image Include="Resource\Images\Player\P_Bullet\爆弾.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Player\飛ぶ1.png">
+    <Image Include="Resource\Images\Player\飛ぶ1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Player\飛ぶ2.png">
+    <Image Include="Resource\Images\Player\飛ぶ2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\result\BAD.png">
+    <Image Include="Resource\Images\result\BAD.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\result\OK.png">
+    <Image Include="Resource\Images\result\OK.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\result\Perfect.png">
+    <Image Include="Resource\Images\result\Perfect.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\result\GOOD.png">
+    <Image Include="Resource\Images\result\GOOD.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\Stage\背景2.png">
+    <Image Include="Resource\Images\Stage\背景2.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\images\timer\timer-03.png">
+    <Image Include="Resource\Images\timer\timer-03.png">
       <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resource\images\number\0.svg" />
-    <None Include="Resource\images\number\1.svg" />
-    <None Include="Resource\images\number\2.svg" />
-    <None Include="Resource\images\number\3.svg" />
-    <None Include="Resource\images\number\5.svg" />
-    <None Include="Resource\images\number\4.svg" />
-    <None Include="Resource\images\number\6.svg" />
-    <None Include="Resource\images\number\8.svg" />
-    <None Include="Resource\images\number\9.svg" />
-    <None Include="Resource\images\number\7.svg" />
-    <None Include="Resource\images\number\フライテキスト.sprite3" />
-    <None Include="Resource\images\result\Finish.svg" />
-    <None Include="Resource\images\score\font-21.svg" />
-    <None Include="Resource\images\score\hs.svg" />
+    <None Include="Resource\Images\number\0.svg" />
+    <None Include="Resource\Images\number\1.svg" />
+    <None Include="Resource\Images\number\2.svg" />
+    <None Include="Resource\Images\number\3.svg" />
+    <None Include="Resource\Images\number\5.svg" />
+    <None Include="Resource\Images\number\4.svg" />
+    <None Include="Resource\Images\number\6.svg" />
+    <None Include="Resource\Images\number\8.svg" />
+    <None Include="Resource\Images\number\9.svg" />
+    <None Include="Resource\Images\number\7.svg" />
+    <None Include="Resource\Images\number\フライテキスト.sprite3" />
+    <None Include="Resource\Images\result\Finish.svg" />
+    <None Include="Resource\Images\score\font-21.svg" />
+    <None Include="Resource\Images\score\hs.svg" />
     <None Include="Resource\sounds\Enemy\gold\金のテキ.sprite3" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +189,12 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Objects\GameObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Enemy\Enemy.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

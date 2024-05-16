@@ -99,7 +99,7 @@ Vector2D& Vector2D::operator*=(const Vector2D& location)
 
 const Vector2D Vector2D::operator/(const float& scalar)const
 {
-	if (fabsf(scalar) < 1e6f)
+	if (fabsf(scalar) < 1e-6f)
 	{
 		return Vector2D(0.0f);
 	}
