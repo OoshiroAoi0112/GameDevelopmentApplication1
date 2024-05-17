@@ -33,6 +33,12 @@
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Player\Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Player\Bullet\Bullet.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\Images\Enemy\E_Bullet\eff1.png">
@@ -89,7 +95,7 @@
     <Image Include="Resource\Images\Player\P_Bullet\3.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\Images\Player\P_Bullet\爆弾.png">
+    <Image Include="Resource\Images\Player\P_Bullet\bom.png">
       <Filter>リソース ファイル</Filter>
     </Image>
     <Image Include="Resource\Images\Player\飛ぶ1.png">
@@ -110,7 +116,7 @@
     <Image Include="Resource\Images\result\GOOD.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\Images\Stage\背景2.png">
+    <Image Include="Resource\Images\Stage\bg.png">
       <Filter>リソース ファイル</Filter>
     </Image>
     <Image Include="Resource\Images\timer\timer-03.png">
@@ -195,6 +201,12 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Scene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Player\Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Player\Bullet\Bullet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

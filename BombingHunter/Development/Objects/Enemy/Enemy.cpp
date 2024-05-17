@@ -27,6 +27,8 @@ void Enemy::Initialize()
 	{
 		throw("ハコ敵の画像がありません\n");
 	}
+	//移動量
+	velocity.x = 4;
 
 	//向きの設定
 	radian = 0.0;
@@ -79,7 +81,16 @@ void Enemy::Finalize()
 void Enemy::OnHitCollision(GameObject* hit_object)
 {
 	//当たったときの処理
+	velocity.x *=-1;
 
+	if (velocity.x < 0)
+	{
+		flip_flag = TRUE;
+	}
+	else
+	{
+		flip_flag = FALSE;
+	}
 }
 
 //移動処理
@@ -88,19 +99,17 @@ void Enemy::Movement()
 	//ハコ敵の高さ設定
 	location.y = 480.0f-scale;
 
-	//移動の速さ
-	Vector2D velocity = 0.0f;
-
-	velocity.x = 4.0f;
-	
-
 	//現在の一座標に速さを加算する
 	location += velocity;
 
 	//右の壁に当たると左の壁から出てくる
-	if (location.x > 640)
+	if (location.x > 640.0f)
 	{
-		location.x = 0;
+		location.x = 0.0f;
+	}
+	if (location.x < 0.0f)
+	{
+		location.x = 640.0f;
 	}
 }
 

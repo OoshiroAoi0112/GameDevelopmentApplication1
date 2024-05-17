@@ -53,6 +53,12 @@ Vector2D GameObject::GetLocation() const
 	return this->location;
 }
 
+//オブジェクトサイズ取得
+Vector2D GameObject::GetBoxSize() const
+{
+	return this->box_size;
+}
+
 //位置情報設定処理
 void GameObject::SetLocation(const Vector2D& location)
 {

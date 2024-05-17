@@ -132,8 +132,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="Objects\Player\Bullet\Bullet.cpp" />
     <ClCompile Include="Objects\Enemy\Enemy.cpp" />
     <ClCompile Include="Objects\GameObject.cpp" />
+    <ClCompile Include="Objects\Player\Player.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Utility\InputControl.cpp" />
     <ClCompile Include="Utility\Vector2D.cpp" />
@@ -157,14 +159,14 @@
     <Image Include="Resource\Images\Player\P_Bullet\1.png" />
     <Image Include="Resource\Images\Player\P_Bullet\2.png" />
     <Image Include="Resource\Images\Player\P_Bullet\3.png" />
-    <Image Include="Resource\Images\Player\P_Bullet\爆弾.png" />
+    <Image Include="Resource\Images\Player\P_Bullet\bom.png" />
     <Image Include="Resource\Images\Player\飛ぶ1.png" />
     <Image Include="Resource\Images\Player\飛ぶ2.png" />
     <Image Include="Resource\Images\result\BAD.png" />
     <Image Include="Resource\Images\result\GOOD.png" />
     <Image Include="Resource\Images\result\OK.png" />
     <Image Include="Resource\Images\result\Perfect.png" />
-    <Image Include="Resource\Images\Stage\背景2.png" />
+    <Image Include="Resource\Images\Stage\bg.png" />
     <Image Include="Resource\Images\timer\timer-03.png" />
   </ItemGroup>
   <ItemGroup>
@@ -202,8 +204,10 @@
     <Media Include="Resource\sounds\Stage\ポップ.wav" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Player\Bullet\Bullet.h" />
     <ClInclude Include="Objects\Enemy\Enemy.h" />
     <ClInclude Include="Objects\GameObject.h" />
+    <ClInclude Include="Objects\Player\Player.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Utility\InputControl.h" />
     <ClInclude Include="Utility\Vector2D.h" />

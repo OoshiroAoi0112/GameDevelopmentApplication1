@@ -6,6 +6,7 @@ class GameObject
 {
 protected:
 	Vector2D location; //位置情報
+	Vector2D box_size; //大きさ
 	double scale;     //大きさ
 	double radian;    //向き
 	int image;        //描画する画像
@@ -25,6 +26,9 @@ public:
 
 	//位置情報取得処理
 	Vector2D GetLocation() const;
+	
+	//オブジェクトサイズ取得
+	Vector2D GetBoxSize() const;
 	//位置情報変更処理
 	void SetLocation(const Vector2D& locaiton);
 };
