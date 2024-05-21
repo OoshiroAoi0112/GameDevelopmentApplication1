@@ -8,6 +8,8 @@ private:
 	int speed;
 	int animation[4];
 	int animation_count;
+	int anim_active;
+	int image_count;
 
 public:
 	Bullet();

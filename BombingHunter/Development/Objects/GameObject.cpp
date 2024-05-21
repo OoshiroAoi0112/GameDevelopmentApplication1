@@ -5,7 +5,8 @@ GameObject::GameObject() :
 	scale(0.0),
 	radian(0.0),
 	image(0),
-	sound(0)
+	sound(0),
+	destroy(false)
 {
 
 }
@@ -63,4 +64,9 @@ Vector2D GameObject::GetBoxSize() const
 void GameObject::SetLocation(const Vector2D& location)
 {
 	this->location = location;
+}
+
+bool GameObject::GetDestroy() const
+{
+	return destroy;
 }

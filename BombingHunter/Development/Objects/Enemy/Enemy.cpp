@@ -28,7 +28,7 @@ void Enemy::Initialize()
 		throw("ƒnƒR“G‚Ì‰æ‘œ‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}
 	//ˆÚ“®—Ê
-	velocity.x = 4;
+	velocity.x = 2;
 
 	//Œü‚«‚Ìİ’è
 	radian = 0.0;

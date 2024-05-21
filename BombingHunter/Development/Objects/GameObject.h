@@ -11,6 +11,7 @@ protected:
 	double radian;    //向き
 	int image;        //描画する画像
 	int sound;        //再生する音源
+	bool destroy;     //壊したいオブジェクトかどうか
 
 public:
 	GameObject();
@@ -26,6 +27,8 @@ public:
 
 	//位置情報取得処理
 	Vector2D GetLocation() const;
+	//オブジェクトを消したいかどうか
+	bool GetDestroy()const;
 	
 	//オブジェクトサイズ取得
 	Vector2D GetBoxSize() const;

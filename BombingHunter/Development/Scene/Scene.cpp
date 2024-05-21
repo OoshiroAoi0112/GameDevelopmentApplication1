@@ -44,9 +44,16 @@ void Scene::Update()
 		obj->Update();
 	}
 
-	for (GameObject* bule : p_bullet)
+	//Fを押すと弾を生成する
+	if (InputControl::GetKeyDown(KEY_INPUT_F))
 	{
-		bule->Update();
+		CreateBullet<Bullet>(Vector2D(objects[0]->GetLocation()));
+	}
+
+	//弾の更新
+	for (GameObject* bullet : p_bullet)
+	{
+		bullet->Update();
 	}
 
 	//オブジェクト同士の当たり判定チェック
@@ -55,19 +62,18 @@ void Scene::Update()
 		//当たり判定チェック処理
 		HitCheckObject(objects[0], objects[i]);
 	}
-
-	if (InputControl::GetKeyDown(KEY_INPUT_F))
-	{
-		CreateBullet<Bullet>(Vector2D(objects[0]->GetLocation()));
-	}
 	//弾と敵同士の当たり判定チェック
-	for (int i = 0; i < p_bullet.size(); i++)
+	for (GameObject* bullet : p_bullet)
 	{
-		for (int j = i + 1; j < objects.size(); j++)
+		if (bullet->GetDestroy() == false)
 		{
-			HitCheckObject(p_bullet[i], objects[j]);
+			for (int j = 1; j < objects.size(); j++)
+			{
+				HitCheckObject(bullet, objects[j]);
+			}
 		}
 	}
+
 }
 
 //描画処理
@@ -82,9 +88,9 @@ void Scene::Draw()const
 		obj->Draw();
 	}
 
-	for (GameObject* bule : p_bullet)
+	for (GameObject* bullet : p_bullet)
 	{
-		bule->Draw();
+		bullet->Draw();
 	}
 }
 
@@ -107,10 +113,10 @@ void Scene::Finalize()
 		obj->Finalize();
 		delete obj;
 	}
-	for (GameObject* bule : p_bullet)
+	for (GameObject* bullet : p_bullet)
 	{
-		bule->Finalize();
-		delete bule;
+		bullet->Finalize();
+		delete bullet;
 	}
 
 	//動的配列の解放
