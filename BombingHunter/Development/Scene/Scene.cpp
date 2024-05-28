@@ -9,6 +9,22 @@
 Scene::Scene() :objects()
 {
 	back_image = NULL;
+	for (int i = 0; i < ENEMY_TYPE; i++)
+	{
+		switch (i)
+		{
+			case 0:
+			case 1:
+				create_enemy[i] = 3;
+				break;
+			case 2:
+				create_enemy[i] = 2;
+				break;
+			case 3:
+				create_enemy[i] = 1;
+				break;
+		}
+	}
 }
 
 //デストラクタ
@@ -41,9 +57,11 @@ void Scene::Update()
 	//シーンに存在するオブジェクトの更新処理
 	for (GameObject* obj : objects)
 	{
-		obj->Update();
+		if (obj->GetDestroy() == false)
+		{
+			obj->Update();
+		}
 	}
-
 	//Fを押すと弾を生成する
 	if (InputControl::GetKeyDown(KEY_INPUT_F))
 	{
@@ -68,6 +86,7 @@ void Scene::Update()
 	//弾と敵同士の当たり判定チェック
 	for (GameObject* bullet : p_bullet)
 	{
+		//弾が一度も敵に触れていない状態
 		if (bullet->GetHit() == false)
 		{
 			for (int j = 1; j < objects.size(); j++)
@@ -87,11 +106,17 @@ void Scene::Draw()const
 	//シーンに存在するオブジェクトの描画処理
 	for (GameObject* obj : objects)
 	{
-		obj->Draw();
+		//消したい画像を非表示にする
+		if (obj->GetDestroy() == false)
+		{
+			obj->Draw();
+		}
 	}
 
+	//画面に存在する弾の描画
 	for (GameObject* bullet : p_bullet)
 	{
+		//消したい画像を非表示にする
 		if (bullet->GetDestroy() == false)
 		{
 			bullet->Draw();

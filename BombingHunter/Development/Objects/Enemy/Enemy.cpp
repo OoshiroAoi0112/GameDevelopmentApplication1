@@ -18,6 +18,7 @@ Enemy::~Enemy()
 //初期化処理
 void Enemy::Initialize()
 {
+
 	//画像の読み込み
 	animation[0] = LoadGraph("Resource/Images/Enemy/hako/1.png");
 	animation[1] = LoadGraph("Resource/Images/Enemy/hako/2.png");
@@ -39,27 +40,27 @@ void Enemy::Initialize()
 	//初期画像の設定
 	image = animation[0];
 
+	//消したいかどうか
 	destroy = false;
 }
 
 //更新処理
 void Enemy::Update()
 {
-	if (destroy==false)
+	//動けるかどうか
+	if (move_active == true)
 	{
-		if (move_active == true)
-		{
-			//移動処理
-			Movement();
-		}
-		//アニメーション制御
-		AnimeControl();
+		//移動処理
+		Movement();
 	}
+	//アニメーション制御
+	AnimeControl();
 }
 
 //描画処理
 void Enemy::Draw()const
 {
+	//被弾したなら
 	if (move_active == false)
 	{
 		//描画モードをアルファブレンドにする
@@ -94,6 +95,7 @@ void Enemy::Finalize()
 //当たり判定通知処理
 void Enemy::OnHitCollision(GameObject* hit_object)
 {
+	//被弾したら動けなくする
 	move_active = false;
 	animation_count = 0;
 }
@@ -155,6 +157,7 @@ void Enemy::AnimeControl()
 			location.x -= 5.0f;
 		}
 		location.y -= 1.0f;
+		//敵の削除
 		if (animation_count >= 90)
 		{
 			destroy = true;

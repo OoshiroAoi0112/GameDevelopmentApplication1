@@ -18,6 +18,8 @@ Player::~Player()
 //‰Šú‰»ˆ—
 void Player::Initialize()
 {
+	location = (Vector2D(100.0f, 100.0f));
+
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
 	animation[0] = LoadGraph("Resource/Images/Player/”ò‚Ô1.png");
 	animation[1] = LoadGraph("Resource/Images/Player/”ò‚Ô2.png");
@@ -36,6 +38,8 @@ void Player::Initialize()
 
 	//‰Šú‰æ‘œ‚Ìİ’è
 	image = animation[0];
+
+	destroy = false;
 }
 
 //XVˆ—
