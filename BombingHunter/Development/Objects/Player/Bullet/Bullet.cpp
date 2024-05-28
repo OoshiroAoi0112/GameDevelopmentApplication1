@@ -2,7 +2,7 @@
 #include "DxLib.h"
 
 //コンストラクタ
-Bullet::Bullet() :speed(4),animation_count(0),anim_active(0),image_count(0)
+Bullet::Bullet() :speed(4),animation_count(0),anim_active(false),image_count(0)
 {
 	for (int i=0; i < 4; i++)
 	{
@@ -44,11 +44,11 @@ void Bullet::Initialize()
 //更新処理
 void Bullet::Update()
 {
-	if (destroy == false)
+	if (hit == false)
 	{
 		Movement();
 	}
-	if (image_count <= 3 && anim_active==1)
+	if (image_count <= 4 && anim_active==true)
 	{
 		AnimeControl();
 	}
@@ -87,8 +87,8 @@ void Bullet::OnHitCollision(GameObject* hit_object)
 	speed = 0;
 	radian = 0;
 	image_count = 1;
-	anim_active = 1;
-	destroy = true;
+	anim_active = true;
+	hit = true;
 }
 
 //移動処理
@@ -100,7 +100,7 @@ void Bullet::Movement()
 		speed = 0;
 		radian = 0;
 		image_count = 1;
-		anim_active = 1;
+		anim_active = true;
 	}
 }
 
@@ -114,15 +114,20 @@ void Bullet::AnimeControl()
 		{
 		case 0:
 		case 1:
+		case 3:
 			break;
 		case 2:
-			destroy = true;
+			hit = true;
 			break;
-		case 3:
-			anim_active = 0;
+		case 4:
+			anim_active = false;
+			destroy = true;
 			break;
 		}
 		animation_count = 0;
 	}
-	image = animation[image_count];
+	if (image_count <= 3)
+	{
+		image = animation[image_count];
+	}
 }

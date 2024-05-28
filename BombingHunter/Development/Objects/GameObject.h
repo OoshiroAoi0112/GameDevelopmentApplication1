@@ -7,11 +7,12 @@ class GameObject
 protected:
 	Vector2D location; //位置情報
 	Vector2D box_size; //大きさ
-	double scale;     //大きさ
-	double radian;    //向き
-	int image;        //描画する画像
-	int sound;        //再生する音源
-	bool destroy;     //壊したいオブジェクトかどうか
+	double scale;      //大きさ
+	double radian;     //向き
+	int image;         //描画する画像
+	int sound;         //再生する音源
+	bool hit;          //オブジェクトに当たり判定が残っているか
+	bool destroy;      //オブジェクトを壊したいか
 
 public:
 	GameObject();
@@ -27,9 +28,10 @@ public:
 
 	//位置情報取得処理
 	Vector2D GetLocation() const;
+	//当たり判定の有無
+	bool GetHit()const;
 	//オブジェクトを消したいかどうか
 	bool GetDestroy()const;
-	
 	//オブジェクトサイズ取得
 	Vector2D GetBoxSize() const;
 	//位置情報変更処理

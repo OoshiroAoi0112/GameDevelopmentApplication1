@@ -3,7 +3,7 @@
 #include "DxLib.h"
 
 //コンストラクタ
-Enemy::Enemy() :animation_count(0), flip_flag(FALSE)
+Enemy::Enemy() :animation_count(0), flip_flag(FALSE),move_active(true)
 {
 	animation[0] = NULL;
 	animation[1] = NULL;
@@ -38,22 +38,36 @@ void Enemy::Initialize()
 
 	//初期画像の設定
 	image = animation[0];
+
+	destroy = false;
 }
 
 //更新処理
 void Enemy::Update()
 {
-	//移動処理
-	Movement();
-	//アニメーション制御
-	AnimeControl();
+	if (destroy==false)
+	{
+		if (move_active == true)
+		{
+			//移動処理
+			Movement();
+		}
+		//アニメーション制御
+		AnimeControl();
+	}
 }
 
 //描画処理
 void Enemy::Draw()const
 {
+	if (move_active == false)
+	{
+		//描画モードをアルファブレンドにする
+		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 255);
+	}
 	//プレイヤー画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, radian, image, TRUE, flip_flag);
+	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL,0);
 
 	//デバッグ用
 #if _DEBUG
@@ -80,17 +94,8 @@ void Enemy::Finalize()
 //当たり判定通知処理
 void Enemy::OnHitCollision(GameObject* hit_object)
 {
-	//当たったときの処理
-	velocity.x *=-1;
-
-	if (velocity.x < 0)
-	{
-		flip_flag = TRUE;
-	}
-	else
-	{
-		flip_flag = FALSE;
-	}
+	move_active = false;
+	animation_count = 0;
 }
 
 //移動処理
@@ -105,11 +110,13 @@ void Enemy::Movement()
 	//右の壁に当たると左の壁から出てくる
 	if (location.x > 640.0f)
 	{
-		location.x = 0.0f;
+		velocity.x *= -1;
+			flip_flag = TRUE;
 	}
 	if (location.x < 0.0f)
 	{
-		location.x = 640.0f;
+		velocity.x *= -1;
+		flip_flag = FALSE;
 	}
 }
 
@@ -118,21 +125,40 @@ void Enemy::AnimeControl()
 {
 	//フレームカウントを加算する
 	animation_count++;
-
-	//60フレーム目に達したら
-	if (animation_count >= 40)
+	if (move_active == true)
 	{
-		//カウントのリセット
-		animation_count = 0;
+		//40フレーム目に達したら
+		if (animation_count >= 40)
+		{
+			//カウントのリセット
+			animation_count = 0;
 
-		//画像の切り替え
-		if (image == animation[0])
-		{
-			image = animation[1];
+			//画像の切り替え
+			if (image == animation[0])
+			{
+				image = animation[1];
+			}
+			else
+			{
+				image = animation[0];
+			}
 		}
-		else
+	}
+	else
+	{
+		if (animation_count % 8 == 0)
 		{
-			image = animation[0];
+			location.x += 5.0f;
+		}
+		else if (animation_count % 8 == 4)
+		{
+			location.x -= 5.0f;
+		}
+		location.y -= 1.0f;
+		if (animation_count >= 90)
+		{
+			destroy = true;
+			Finalize();
 		}
 	}
 }

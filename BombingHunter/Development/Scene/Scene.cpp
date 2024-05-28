@@ -23,7 +23,7 @@ void Scene::Initialize()
 {
 	//”wŒi‰æ‘œ“Ç‚Ýž‚Ý
 	back_image = LoadGraph("Resource/Images/Stage/bg.png");
-
+	
 	if (back_image == -1)
 	{
 		throw("”wŒi‰æ‘œ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
@@ -53,7 +53,10 @@ void Scene::Update()
 	//’e‚ÌXV
 	for (GameObject* bullet : p_bullet)
 	{
-		bullet->Update();
+		if (bullet->GetDestroy() == false)
+		{
+			bullet->Update();
+		}
 	}
 
 	//ƒIƒuƒWƒFƒNƒg“¯Žm‚Ì“–‚½‚è”»’èƒ`ƒFƒbƒN
@@ -65,7 +68,7 @@ void Scene::Update()
 	//’e‚Æ“G“¯Žm‚Ì“–‚½‚è”»’èƒ`ƒFƒbƒN
 	for (GameObject* bullet : p_bullet)
 	{
-		if (bullet->GetDestroy() == false)
+		if (bullet->GetHit() == false)
 		{
 			for (int j = 1; j < objects.size(); j++)
 			{
@@ -73,7 +76,6 @@ void Scene::Update()
 			}
 		}
 	}
-
 }
 
 //•`‰æˆ—
@@ -90,7 +92,10 @@ void Scene::Draw()const
 
 	for (GameObject* bullet : p_bullet)
 	{
-		bullet->Draw();
+		if (bullet->GetDestroy() == false)
+		{
+			bullet->Draw();
+		}
 	}
 }
 

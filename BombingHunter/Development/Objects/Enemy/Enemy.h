@@ -8,6 +8,7 @@ private:
 	int animation[2];
 	int animation_count;
 	int flip_flag;
+	bool move_active;
 
 public:
 	Enemy();

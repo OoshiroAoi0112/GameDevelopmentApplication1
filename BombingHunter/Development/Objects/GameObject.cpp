@@ -6,6 +6,7 @@ GameObject::GameObject() :
 	radian(0.0),
 	image(0),
 	sound(0),
+	hit(false),
 	destroy(false)
 {
 
@@ -64,6 +65,11 @@ Vector2D GameObject::GetBoxSize() const
 void GameObject::SetLocation(const Vector2D& location)
 {
 	this->location = location;
+}
+
+bool GameObject::GetHit() const
+{
+	return hit;
 }
 
 bool GameObject::GetDestroy() const
