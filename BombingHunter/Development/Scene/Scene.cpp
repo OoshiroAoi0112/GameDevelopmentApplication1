@@ -6,24 +6,13 @@
 #include "DxLib.h"
 
 //コンストラクタ
-Scene::Scene() :objects()
+Scene::Scene() :objects(),create_count(0)
 {
 	back_image = NULL;
+	destroy_number = 0;
 	for (int i = 0; i < ENEMY_TYPE; i++)
 	{
-		switch (i)
-		{
-			case 0:
-			case 1:
-				create_enemy[i] = 3;
-				break;
-			case 2:
-				create_enemy[i] = 2;
-				break;
-			case 3:
-				create_enemy[i] = 1;
-				break;
-		}
+		create_enemy[i] = NULL;
 	}
 }
 
@@ -45,15 +34,70 @@ void Scene::Initialize()
 		throw("背景画像が見つかりません");
 	}
 
+	for (int i = 0; i < ENEMY_TYPE; i++)
+	{
+		switch (i)
+		{
+		case HAKO:
+		case HANE:
+			create_enemy[i] = 3;
+			break;
+		case HARPY:
+			create_enemy[i] = 2;
+			break;
+		case GOLD:
+			create_enemy[i] = 1;
+			break;
+		}
+	}
+
 	//プレイヤーを生成する
-	CreateObject<Player>(Vector2D(100.0f, 100.0f));
-	//敵を生成する
-	CreateObject<Enemy>(Vector2D(320.0f, 240.0f));
+	CreateObject<Player>(Vector2D(100.0f,100.0f),5);
+	////敵を生成する
+	//CreateObject<Enemy>(Vector2D(400.0f,300.0f));
 }
 
 //更新処理
 void Scene::Update()
 {
+	create_count++;
+	if (create_count >= 60)
+	{
+		create_count = 0;
+		for (int i = 0; i < ENEMY_TYPE; i++)
+		{
+			if (create_enemy[i] > 0)
+			{
+				switch (i)
+				{
+					case 0:
+						CreateObject<Enemy>(Vector2D(40.0f, 420.0f),i);
+						create_enemy[i] -= 1;
+						break;
+					case 1:
+						CreateObject<Enemy>(Vector2D(40.0f, 300.0f),i);
+						create_enemy[i] -= 1;
+						break;
+					case 2:
+						CreateObject<Enemy>(Vector2D(40.0f, 200.0f),i);
+						create_enemy[i] -= 1;
+						break;
+					case 3:
+						CreateObject<Enemy>(Vector2D(40.0f, 100.0f),i);
+						create_enemy[i] -= 1;
+						break;
+				}
+				
+			}
+		}
+	}
+
+	//Fを押すと弾を生成する
+	if (InputControl::GetKeyDown(KEY_INPUT_F))
+	{
+		CreateBullet<Bullet>(Vector2D(objects[0]->GetLocation()));
+	}
+
 	//シーンに存在するオブジェクトの更新処理
 	for (GameObject* obj : objects)
 	{
@@ -62,19 +106,15 @@ void Scene::Update()
 			obj->Update();
 		}
 	}
-	//Fを押すと弾を生成する
-	if (InputControl::GetKeyDown(KEY_INPUT_F))
-	{
-		CreateBullet<Bullet>(Vector2D(objects[0]->GetLocation()));
-	}
-
 	//弾の更新
+	destroy_number = 0;
 	for (GameObject* bullet : p_bullet)
 	{
 		if (bullet->GetDestroy() == false)
 		{
 			bullet->Update();
 		}
+		destroy_number++;
 	}
 
 	//オブジェクト同士の当たり判定チェック
@@ -83,18 +123,42 @@ void Scene::Update()
 		//当たり判定チェック処理
 		HitCheckObject(objects[0], objects[i]);
 	}
+
 	//弾と敵同士の当たり判定チェック
-	for (GameObject* bullet : p_bullet)
+	for (GameObject* obj : objects)
 	{
-		//弾が一度も敵に触れていない状態
-		if (bullet->GetHit() == false)
+		//敵が一度も弾に触れていない状態
+		if (!obj->GetHit())
 		{
-			for (int j = 1; j < objects.size(); j++)
+			for (int i = 0; i < p_bullet.size(); i++)
 			{
-				HitCheckObject(bullet, objects[j]);
+				HitCheckObject(p_bullet[i], obj);
 			}
 		}
 	}
+
+	destroy_number = 0;
+	for (GameObject* obj : objects)
+	{
+		if (obj->GetDestroy())
+		{
+			create_enemy[obj->GetObjectType()]++;
+			objects.erase(objects.begin() + destroy_number);
+			destroy_number--;
+		}
+		destroy_number++;
+	}
+	destroy_number = 0;
+	for (GameObject* bullet : p_bullet)
+	{
+		if (bullet->GetDestroy())
+		{
+			p_bullet.erase(p_bullet.begin() + destroy_number);
+			destroy_number--;
+		}
+		destroy_number++;
+	}
+	destroy_number = 0;
 }
 
 //描画処理

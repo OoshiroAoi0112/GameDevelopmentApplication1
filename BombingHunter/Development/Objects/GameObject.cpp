@@ -7,7 +7,8 @@ GameObject::GameObject() :
 	image(0),
 	sound(0),
 	hit(false),
-	destroy(false)
+	destroy(false),
+	object_type(0)
 {
 
 }
@@ -61,10 +62,20 @@ Vector2D GameObject::GetBoxSize() const
 	return this->box_size;
 }
 
+int GameObject::GetObjectType() const
+{
+	return object_type;
+}
+
 //ˆÊ’uî•ñÝ’èˆ—
 void GameObject::SetLocation(const Vector2D& location)
 {
 	this->location = location;
+}
+
+void GameObject::SetObjectType(int object_type)
+{
+	this->object_type = object_type;
 }
 
 bool GameObject::GetHit() const

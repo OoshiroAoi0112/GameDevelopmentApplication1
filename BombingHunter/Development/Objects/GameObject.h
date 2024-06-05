@@ -13,6 +13,7 @@ protected:
 	int sound;         //再生する音源
 	bool hit;          //オブジェクトに当たり判定が残っているか
 	bool destroy;      //オブジェクトを壊したいか
+	int object_type;   //オブジェクトの種類
 
 public:
 	GameObject();
@@ -34,7 +35,11 @@ public:
 	bool GetDestroy()const;
 	//オブジェクトサイズ取得
 	Vector2D GetBoxSize() const;
+
+	int GetObjectType() const;
 	//位置情報変更処理
 	void SetLocation(const Vector2D& locaiton);
+
+	void SetObjectType(int object_type);
 };
 

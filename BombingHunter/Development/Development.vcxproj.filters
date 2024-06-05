@@ -50,7 +50,7 @@
     <Image Include="Resource\Images\Enemy\E_Bullet\eff3.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\Images\Enemy\gold\1 %281%29.png">
+    <Image Include="Resource\Images\Enemy\gold\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
     <Image Include="Resource\Images\Enemy\gold\5.png">

@@ -8,7 +8,7 @@ private:
 	int animation[2];     //描画画像
 	int animation_count;  //画像切り替えタイミング
 	int flip_flag;        //画像の反転判定
-	bool move_active;     //動ける状態か（被弾したかどうか）
+	bool hit;     //動ける状態か（被弾したかどうか）
 
 public:
 	Enemy();

@@ -1,4 +1,8 @@
 #pragma once
+#define HAKO  (0)
+#define HANE  (1)
+#define HARPY (2)
+#define GOLD  (3)
 #define ENEMY_TYPE  (4)
 
 #include <vector>
@@ -12,6 +16,8 @@ private:
 	std::vector<GameObject*>p_bullet;
 	int back_image;
 	int create_enemy[ENEMY_TYPE];
+	int create_count;
+	int destroy_number;
 
 public:
 	Scene();
@@ -26,9 +32,9 @@ private:
 	//当たり判定チェック処理
 	void HitCheckObject(GameObject* a, GameObject* b);
 
-	//オブジェクト生成処理
+	//オブジェクト生成処理  //引数const Vector2D& location
 	template<class T>
-	T* CreateObject(const Vector2D& location)
+	T* CreateObject(const Vector2D& location,int object_type)
 	{
 		//指定したクラスを生成する
 		T* new_instance = new T();
@@ -43,10 +49,12 @@ private:
 			throw std::string("ゲームオブジェクトが生成できませんでした");
 		}
 
+		//
+		new_object->SetObjectType(object_type);
 		//初期化処理
 		new_object->Initialize();
-		////位置情報の設定
-		//new_object->SetLocation(location);
+		//位置情報の設定
+		new_object->SetLocation(location);
 
 		//オブジェクトリストに追加
 		objects.push_back(new_object);

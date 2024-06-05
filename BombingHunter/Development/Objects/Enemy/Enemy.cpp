@@ -3,7 +3,7 @@
 #include "DxLib.h"
 
 //コンストラクタ
-Enemy::Enemy() :animation_count(0), flip_flag(FALSE),move_active(true)
+Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false)
 {
 	animation[0] = NULL;
 	animation[1] = NULL;
@@ -18,10 +18,30 @@ Enemy::~Enemy()
 //初期化処理
 void Enemy::Initialize()
 {
+	//location = (Vector2D(400.0f, 300.0f));
 
 	//画像の読み込み
-	animation[0] = LoadGraph("Resource/Images/Enemy/hako/1.png");
-	animation[1] = LoadGraph("Resource/Images/Enemy/hako/2.png");
+
+	switch (GetObjectType())
+	{
+		case 0:
+			animation[0] = LoadGraph("Resource/Images/Enemy/hako/1.png");
+			animation[1] = LoadGraph("Resource/Images/Enemy/hako/2.png");
+			break;
+		case 1:
+			animation[0] = LoadGraph("Resource/Images/Enemy/hane/1.png");
+			animation[1] = LoadGraph("Resource/Images/Enemy/hane/2.png");
+			break;
+		case 2:
+			animation[0] = LoadGraph("Resource/Images/Enemy/harpy/1.png");
+			animation[1] = LoadGraph("Resource/Images/Enemy/harpy/2.png");
+			break;
+		case 3:
+			animation[0] = LoadGraph("Resource/Images/Enemy/gold/3.png");
+			animation[1] = LoadGraph("Resource/Images/Enemy/gold/5.png");
+			break;
+	}
+	
 
 	//エラーチェック
 	if (animation[0] == -1 || animation[1] == -1)
@@ -35,10 +55,14 @@ void Enemy::Initialize()
 	radian = 0.0;
 
 	//大きさの設定
+	box_size = 64.0;
 	scale = 64.0;
 
 	//初期画像の設定
 	image = animation[0];
+
+	//弾に当たったかどうか
+	hit = false;
 
 	//消したいかどうか
 	destroy = false;
@@ -48,7 +72,7 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	//動けるかどうか
-	if (move_active == true)
+	if (hit == false)
 	{
 		//移動処理
 		Movement();
@@ -61,7 +85,7 @@ void Enemy::Update()
 void Enemy::Draw()const
 {
 	//被弾したなら
-	if (move_active == false)
+	if (hit == true)
 	{
 		//描画モードをアルファブレンドにする
 		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 255);
@@ -73,10 +97,8 @@ void Enemy::Draw()const
 	//デバッグ用
 #if _DEBUG
 	//辺り判定の可視化
-	Vector2D box_collision_upper_left = location - (Vector2D(1.0f) *
-		(float)scale / 2.0f);
-	Vector2D box_collision_lower_right = location + (Vector2D(1.0f) *
-		(float)scale / 2.0f);
+	Vector2D box_collision_upper_left = location - box_size / 2.0f;
+	Vector2D box_collision_lower_right = location + box_size / 2.0f;
 
 	DrawBoxAA(box_collision_upper_left.x, box_collision_upper_left.y,
 		box_collision_lower_right.x, box_collision_lower_right.y,
@@ -96,15 +118,16 @@ void Enemy::Finalize()
 void Enemy::OnHitCollision(GameObject* hit_object)
 {
 	//被弾したら動けなくする
-	move_active = false;
+	hit = true;
 	animation_count = 0;
+	box_size = 0.0f;
 }
 
 //移動処理
 void Enemy::Movement()
 {
-	//ハコ敵の高さ設定
-	location.y = 480.0f-scale;
+	////ハコ敵の高さ設定
+	//location.y = 480.0f-scale;
 
 	//現在の一座標に速さを加算する
 	location += velocity;
@@ -127,7 +150,7 @@ void Enemy::AnimeControl()
 {
 	//フレームカウントを加算する
 	animation_count++;
-	if (move_active == true)
+	if (hit == false)
 	{
 		//40フレーム目に達したら
 		if (animation_count >= 40)
@@ -156,7 +179,7 @@ void Enemy::AnimeControl()
 		{
 			location.x -= 5.0f;
 		}
-		location.y -= 1.0f;
+		location.y += 0.5f;
 		//敵の削除
 		if (animation_count >= 90)
 		{

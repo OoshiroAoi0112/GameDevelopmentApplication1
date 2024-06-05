@@ -25,5 +25,9 @@ public:
 public:
 	void Movement();
 	void AnimeControl();
+	bool GetAnimActive()
+	{
+		return anim_active;
+	}
 };
 

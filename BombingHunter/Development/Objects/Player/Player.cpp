@@ -39,7 +39,11 @@ void Player::Initialize()
 	//‰Šú‰æ‘œ‚Ìİ’è
 	image = animation[0];
 
+	hit = true;
+
 	destroy = false;
+
+	object_type = 5;
 }
 
 //XVˆ—

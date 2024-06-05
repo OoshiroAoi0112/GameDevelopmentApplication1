@@ -89,6 +89,7 @@ void Bullet::OnHitCollision(GameObject* hit_object)
 	image_count = 1;
 	anim_active = true;
 	hit = true;
+	box_size = 0.0f;
 }
 
 //ˆÚ“®ˆ—
@@ -107,7 +108,7 @@ void Bullet::Movement()
 void Bullet::AnimeControl()
 {
 	animation_count++;
-	if (animation_count >= 30)
+	if (animation_count >= 15)
 	{
 		image_count++;
 		switch (image_count)

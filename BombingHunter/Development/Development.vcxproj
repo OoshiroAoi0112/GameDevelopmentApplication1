@@ -145,7 +145,7 @@
     <Image Include="Resource\Images\Enemy\E_Bullet\eff1.png" />
     <Image Include="Resource\Images\Enemy\E_Bullet\eff2.png" />
     <Image Include="Resource\Images\Enemy\E_Bullet\eff3.png" />
-    <Image Include="Resource\Images\Enemy\gold\1 %281%29.png" />
+    <Image Include="Resource\Images\Enemy\gold\1.png" />
     <Image Include="Resource\Images\Enemy\gold\2.png" />
     <Image Include="Resource\Images\Enemy\gold\3.png" />
     <Image Include="Resource\Images\Enemy\gold\4.png" />
