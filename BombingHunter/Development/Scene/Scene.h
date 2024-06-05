@@ -1,9 +1,4 @@
 #pragma once
-#define HAKO  (0)
-#define HANE  (1)
-#define HARPY (2)
-#define GOLD  (3)
-#define ENEMY_TYPE  (4)
 
 #include <vector>
 #include <string>
@@ -15,7 +10,7 @@ private:
 	std::vector<GameObject*>objects;
 	std::vector<GameObject*>p_bullet;
 	int back_image;
-	int create_enemy[ENEMY_TYPE];
+	int create_enemy[4];
 	int create_count;
 	int destroy_number;
 

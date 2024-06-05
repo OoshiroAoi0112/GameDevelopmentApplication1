@@ -34,60 +34,34 @@ void Scene::Initialize()
 		throw("背景画像が見つかりません");
 	}
 
-	for (int i = 0; i < ENEMY_TYPE; i++)
-	{
-		switch (i)
-		{
-		case HAKO:
-		case HANE:
-			create_enemy[i] = 3;
-			break;
-		case HARPY:
-			create_enemy[i] = 2;
-			break;
-		case GOLD:
-			create_enemy[i] = 1;
-			break;
-		}
-	}
+
+	create_enemy[HAKO] = 3;
+	create_enemy[HANE] = 3;
+	create_enemy[HARPY] = 2;
+	create_enemy[GOLD] = 1;
 
 	//プレイヤーを生成する
 	CreateObject<Player>(Vector2D(100.0f,100.0f),5);
-	////敵を生成する
-	//CreateObject<Enemy>(Vector2D(400.0f,300.0f));
 }
 
 //更新処理
 void Scene::Update()
 {
+	//敵を生成するためのカウント
 	create_count++;
+	//1秒に1種類ずつ敵を生成する
 	if (create_count >= 60)
 	{
 		create_count = 0;
+		//敵の種類分だけループする
 		for (int i = 0; i < ENEMY_TYPE; i++)
 		{
+			//敵の種類ごとの生成可能数が1以上であるかどうか
 			if (create_enemy[i] > 0)
 			{
-				switch (i)
-				{
-					case 0:
-						CreateObject<Enemy>(Vector2D(40.0f, 420.0f),i);
-						create_enemy[i] -= 1;
-						break;
-					case 1:
-						CreateObject<Enemy>(Vector2D(40.0f, 300.0f),i);
-						create_enemy[i] -= 1;
-						break;
-					case 2:
-						CreateObject<Enemy>(Vector2D(40.0f, 200.0f),i);
-						create_enemy[i] -= 1;
-						break;
-					case 3:
-						CreateObject<Enemy>(Vector2D(40.0f, 100.0f),i);
-						create_enemy[i] -= 1;
-						break;
-				}
-				
+				Vector2D gene = Vector2D(40.0f, 420.0f - ((float)i * 100.0f));
+				CreateObject<Enemy>(gene, i);
+				create_enemy[i] -= 1;
 			}
 		}
 	}
@@ -107,14 +81,12 @@ void Scene::Update()
 		}
 	}
 	//弾の更新
-	destroy_number = 0;
 	for (GameObject* bullet : p_bullet)
 	{
 		if (bullet->GetDestroy() == false)
 		{
 			bullet->Update();
 		}
-		destroy_number++;
 	}
 
 	//オブジェクト同士の当たり判定チェック
@@ -137,17 +109,16 @@ void Scene::Update()
 		}
 	}
 
-	destroy_number = 0;
-	for (GameObject* obj : objects)
+	for (int i = 0; i < objects.size(); i++)
 	{
-		if (obj->GetDestroy())
+		if (objects[i]->GetDestroy())
 		{
-			create_enemy[obj->GetObjectType()]++;
-			objects.erase(objects.begin() + destroy_number);
-			destroy_number--;
+			int type = objects[i]->GetObjectType();
+			create_enemy[type]++;
+			objects.erase(objects.begin() + i--);
 		}
-		destroy_number++;
 	}
+
 	destroy_number = 0;
 	for (GameObject* bullet : p_bullet)
 	{

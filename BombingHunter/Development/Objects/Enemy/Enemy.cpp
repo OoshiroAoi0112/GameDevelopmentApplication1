@@ -2,6 +2,7 @@
 #include "../../Utility/InputControl.h"
 #include "DxLib.h"
 
+
 //コンストラクタ
 Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false)
 {
@@ -24,19 +25,19 @@ void Enemy::Initialize()
 
 	switch (GetObjectType())
 	{
-		case 0:
+		case HAKO:
 			animation[0] = LoadGraph("Resource/Images/Enemy/hako/1.png");
 			animation[1] = LoadGraph("Resource/Images/Enemy/hako/2.png");
 			break;
-		case 1:
+		case HANE:
 			animation[0] = LoadGraph("Resource/Images/Enemy/hane/1.png");
 			animation[1] = LoadGraph("Resource/Images/Enemy/hane/2.png");
 			break;
-		case 2:
+		case HARPY:
 			animation[0] = LoadGraph("Resource/Images/Enemy/harpy/1.png");
 			animation[1] = LoadGraph("Resource/Images/Enemy/harpy/2.png");
 			break;
-		case 3:
+		case GOLD:
 			animation[0] = LoadGraph("Resource/Images/Enemy/gold/3.png");
 			animation[1] = LoadGraph("Resource/Images/Enemy/gold/5.png");
 			break;
@@ -132,16 +133,25 @@ void Enemy::Movement()
 	//現在の一座標に速さを加算する
 	location += velocity;
 
-	//右の壁に当たると左の壁から出てくる
-	if (location.x > 640.0f)
+	//
+	/*if (location.x > 640.0f || location.x < 0.0f)
 	{
-		velocity.x *= -1;
-			flip_flag = TRUE;
-	}
-	if (location.x < 0.0f)
+		velocity.x = -velocity.x;
+		if (flip_flag == true)
+		{
+			flip_flag = false;
+		}
+		else
+		{
+			flip_flag = true;
+		}
+	}*/
+	
+	//
+	if (location.x > 640.0f || location.x < 0.0f)
 	{
-		velocity.x *= -1;
-		flip_flag = FALSE;
+		//hit = true;
+		destroy = true;
 	}
 }
 
@@ -184,7 +194,7 @@ void Enemy::AnimeControl()
 		if (animation_count >= 90)
 		{
 			destroy = true;
-			Finalize();
+			
 		}
 	}
 }

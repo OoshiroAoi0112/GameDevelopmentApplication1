@@ -1,6 +1,12 @@
 #pragma once
 #include "../GameObject.h"
 
+#define HAKO  (0)
+#define HANE  (1)
+#define HARPY (2)
+#define GOLD  (3)
+#define ENEMY_TYPE  (4)
+
 class Enemy :public GameObject
 {
 private:
