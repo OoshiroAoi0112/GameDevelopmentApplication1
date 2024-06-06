@@ -2,6 +2,8 @@
 #include "../Objects/Player/Player.h"
 #include "../Objects/Player/Bullet/Bullet.h"
 #include "../Objects/Enemy/Enemy.h"
+#include "../Objects/Enemy/EnemyType/Hako.h"
+#include "../Objects/Enemy/EnemyType/Hane.h"
 #include "../Utility/InputControl.h"
 #include "DxLib.h"
 
@@ -59,8 +61,16 @@ void Scene::Update()
 			//“G‚ÌŽí—Þ‚²‚Æ‚Ì¶¬‰Â”\”‚ª1ˆÈã‚Å‚ ‚é‚©‚Ç‚¤‚©
 			if (create_enemy[i] > 0)
 			{
-				Vector2D gene = Vector2D(40.0f, 420.0f - ((float)i * 100.0f));
-				CreateObject<Enemy>(gene, i);
+				Vector2D gene = Vector2D(100.0f, 420.0f - ((float)i * 100.0f));
+				if (i == HAKO)
+				{
+					CreateObject<Hako>(gene, i);
+				}
+				if (i == HANE)
+				{
+					CreateObject<Hane>(gene, i);
+				}
+				//CreateObject<Enemy>(gene, i); 
 				create_enemy[i] -= 1;
 			}
 		}
@@ -99,13 +109,16 @@ void Scene::Update()
 	//’e‚Æ“G“¯Žm‚Ì“–‚½‚è”»’èƒ`ƒFƒbƒN
 	for (GameObject* obj : objects)
 	{
-		//“G‚ªˆê“x‚à’e‚ÉG‚ê‚Ä‚¢‚È‚¢ó‘Ô
-		if (!obj->GetHit())
+		for (int i = 1; i < objects.size(); i++)
 		{
-			for (int i = 0; i < p_bullet.size(); i++)
-			{
-				HitCheckObject(p_bullet[i], obj);
-			}
+			////“G‚ªˆê“x‚à’e‚ÉG‚ê‚Ä‚¢‚È‚¢ó‘Ô
+			//if (!obj->GetHit())
+			//{
+				for (int j = 0; j < p_bullet.size(); j++)
+				{
+					HitCheckObject(objects[i],p_bullet[j]);
+				}
+			//}
 		}
 	}
 

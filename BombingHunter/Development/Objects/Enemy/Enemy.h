@@ -9,9 +9,9 @@
 
 class Enemy :public GameObject
 {
-private:
+protected:
 	Vector2D velocity;    //座標
-	int animation[2];     //描画画像
+	int animation[5];     //描画画像
 	int animation_count;  //画像切り替えタイミング
 	int flip_flag;        //画像の反転判定
 	bool hit;     //動ける状態か（被弾したかどうか）
@@ -31,6 +31,7 @@ public:
 private:
 	//移動処理
 	void Movement();
+protected:
 	//アニメーション
 	void AnimeControl();
 };

@@ -132,6 +132,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="Objects\Enemy\EnemyType\Hane.cpp" />
+    <ClCompile Include="Objects\Enemy\EnemyType\Gold.cpp" />
+    <ClCompile Include="Objects\Enemy\EnemyType\Harpy.cpp" />
+    <ClCompile Include="Objects\Enemy\EnemyType\Hako.cpp" />
     <ClCompile Include="Objects\Player\Bullet\Bullet.cpp" />
     <ClCompile Include="Objects\Enemy\Enemy.cpp" />
     <ClCompile Include="Objects\GameObject.cpp" />
@@ -204,6 +208,10 @@
     <Media Include="Resource\sounds\Stage\ポップ.wav" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Enemy\EnemyType\Hane.h" />
+    <ClInclude Include="Objects\Enemy\EnemyType\Gold.h" />
+    <ClInclude Include="Objects\Enemy\EnemyType\Harpy.h" />
+    <ClInclude Include="Objects\Enemy\EnemyType\Hako.h" />
     <ClInclude Include="Objects\Player\Bullet\Bullet.h" />
     <ClInclude Include="Objects\Enemy\Enemy.h" />
     <ClInclude Include="Objects\GameObject.h" />

@@ -1,4 +1,8 @@
 #include "Enemy.h"
+#include "EnemyType/Hako.h"
+#include "EnemyType/Hane.h"
+#include "EnemyType/Harpy.h"
+#include "EnemyType/Gold.h"
 #include "../../Utility/InputControl.h"
 #include "DxLib.h"
 
@@ -8,6 +12,9 @@ Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false)
 {
 	animation[0] = NULL;
 	animation[1] = NULL;
+	animation[2] = NULL;
+	animation[3] = NULL;
+	animation[4] = NULL;
 }
 
 //デストラクタ
@@ -19,54 +26,7 @@ Enemy::~Enemy()
 //初期化処理
 void Enemy::Initialize()
 {
-	//location = (Vector2D(400.0f, 300.0f));
 
-	//画像の読み込み
-
-	switch (GetObjectType())
-	{
-		case HAKO:
-			animation[0] = LoadGraph("Resource/Images/Enemy/hako/1.png");
-			animation[1] = LoadGraph("Resource/Images/Enemy/hako/2.png");
-			break;
-		case HANE:
-			animation[0] = LoadGraph("Resource/Images/Enemy/hane/1.png");
-			animation[1] = LoadGraph("Resource/Images/Enemy/hane/2.png");
-			break;
-		case HARPY:
-			animation[0] = LoadGraph("Resource/Images/Enemy/harpy/1.png");
-			animation[1] = LoadGraph("Resource/Images/Enemy/harpy/2.png");
-			break;
-		case GOLD:
-			animation[0] = LoadGraph("Resource/Images/Enemy/gold/3.png");
-			animation[1] = LoadGraph("Resource/Images/Enemy/gold/5.png");
-			break;
-	}
-	
-
-	//エラーチェック
-	if (animation[0] == -1 || animation[1] == -1)
-	{
-		throw("ハコ敵の画像がありません\n");
-	}
-	//移動量
-	velocity.x = 2;
-
-	//向きの設定
-	radian = 0.0;
-
-	//大きさの設定
-	box_size = 64.0;
-	scale = 64.0;
-
-	//初期画像の設定
-	image = animation[0];
-
-	//弾に当たったかどうか
-	hit = false;
-
-	//消したいかどうか
-	destroy = false;
 }
 
 //更新処理
@@ -92,7 +52,7 @@ void Enemy::Draw()const
 		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 255);
 	}
 	//プレイヤー画像の描画
-	DrawRotaGraphF(location.x, location.y, 1.0, radian, image, TRUE, flip_flag);
+	DrawRotaGraphF(location.x, location.y, 0.7, radian, image, TRUE, flip_flag);
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL,0);
 
 	//デバッグ用
@@ -134,7 +94,7 @@ void Enemy::Movement()
 	location += velocity;
 
 	//
-	/*if (location.x > 640.0f || location.x < 0.0f)
+	if (location.x > 640.0f-box_size.x || location.x < box_size.x)
 	{
 		velocity.x = -velocity.x;
 		if (flip_flag == true)
@@ -145,14 +105,14 @@ void Enemy::Movement()
 		{
 			flip_flag = true;
 		}
-	}*/
-	
-	//
-	if (location.x > 640.0f || location.x < 0.0f)
-	{
-		//hit = true;
-		destroy = true;
 	}
+	
+	////
+	//if (location.x > 640.0f || location.x < 0.0f)
+	//{
+	//	//hit = true;
+	//	destroy = true;
+	//}
 }
 
 //アニメーション制御
