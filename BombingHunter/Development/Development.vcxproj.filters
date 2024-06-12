@@ -51,6 +51,9 @@
     <ClCompile Include="Objects\Enemy\EnemyType\Hane.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Enemy\Bullet\EnemyBullet.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\Images\Enemy\E_Bullet\eff1.png">
@@ -95,7 +98,7 @@
     <Image Include="Resource\Images\Enemy\hako\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\Images\Enemy\E_Bullet\1 %281%29.png">
+    <Image Include="Resource\Images\Enemy\E_Bullet\1.png">
       <Filter>リソース ファイル</Filter>
     </Image>
     <Image Include="Resource\Images\Player\P_Bullet\1.png">
@@ -231,6 +234,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Enemy\EnemyType\Hane.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Enemy\Bullet\EnemyBullet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

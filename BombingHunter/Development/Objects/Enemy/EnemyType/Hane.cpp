@@ -26,8 +26,24 @@ void Hane::Initialize()
 		throw("ハコ敵の画像がありません\n");
 	}
 
-	//移動量
-	velocity.x = GetRand(4) + 1;
+
+	////0か1をランダムで取り
+	//出現するx座標・移動する向き・画像の向きを決める
+	int rand_loc = GetRand(1);
+	int vec = GetRand(4) + 1;
+
+	if (rand_loc == 0)
+	{
+		location.x = 0.0f;
+		velocity.x = vec;
+		flip_flag = FALSE;
+	}
+	else
+	{
+		location.x = 640.0f;
+		velocity.x = -vec;
+		flip_flag = TRUE;
+	}
 
 	//向きの設定
 	radian = 0.0f;
@@ -43,12 +59,18 @@ void Hane::Initialize()
 
 	//消したいかどうか
 	destroy = false;
+
+	//オブジェクトの種類
+	object_type = ENEMY;
+
+	//生成したい敵の番号（名前）
+	create_type = HANE;
 }
 
 
 //当たり判定通知処理
 void Hane::OnHitCollision(GameObject* hit_object)
 {
-
+	hit = true;
 }
 

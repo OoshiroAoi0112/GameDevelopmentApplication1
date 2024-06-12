@@ -39,11 +39,14 @@ void Player::Initialize()
 	//初期画像の設定
 	image = animation[0];
 
-	hit = true;
+	//当たっているかどうか
+	hit = false;
 
+	//消したいかどうか
 	destroy = false;
 
-	object_type = 5;
+	//オブジェクトの種類
+	object_type = PLAYER;
 }
 
 //更新処理

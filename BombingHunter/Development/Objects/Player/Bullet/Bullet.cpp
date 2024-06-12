@@ -1,8 +1,9 @@
 #include "Bullet.h"
 #include "DxLib.h"
+#include "../../Utility/InputControl.h"
 
 //コンストラクタ
-Bullet::Bullet() :speed(4),animation_count(0),anim_active(false),image_count(0)
+Bullet::Bullet() :speed(0.0f),animation_count(0),anim_active(false),image_count(0)
 {
 	for (int i=0; i < 4; i++)
 	{
@@ -33,12 +34,27 @@ void Bullet::Initialize()
 			throw("プレイヤーの弾画像がありません");
 		}
 	}
-	//向きの設定
-	radian =DX_PI_F/2;
+	if (InputControl::GetKey(KEY_INPUT_RIGHT) || InputControl::GetKeyDown(KEY_INPUT_RIGHT))
+	{
+		speed = (Vector2D(3.0f,4.0f));
+		radian = DX_PI_F / 4;
+	}
+	else if (InputControl::GetKey(KEY_INPUT_LEFT) || InputControl::GetKeyDown(KEY_INPUT_LEFT))
+	{
+		speed = (Vector2D(-3.0f, 4.0f));
+		radian = DX_PI_F / 4*3;
+	}
+	else
+	{
+		speed = (Vector2D(0.0f, 4.0f));
+		radian = DX_PI_F / 2;
+	}
 	//大きさの設定
 	box_size = 32.0f;
 	//初期画像の設定
 	image = animation[image_count];
+	//オブジェクトの種類
+	object_type = PLAYER;
 }
 
 //更新処理
@@ -95,7 +111,13 @@ void Bullet::OnHitCollision(GameObject* hit_object)
 //移動処理
 void Bullet::Movement()
 {
-	location.y += speed;
+	if (location.x <= 0.0f || location.x >= 640.0f)
+	{
+		speed.x = 0.0f;
+		radian = DX_PI_F / 2;
+	}
+	location+= speed;
+	
 	if (location.y >= 420)
 	{
 		speed = 0;

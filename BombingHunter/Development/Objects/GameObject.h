@@ -1,5 +1,16 @@
 #pragma once
+
 #include "../Utility/Vector2D.h"
+
+//敵の生成管理
+#define HAKO  (0)
+#define HANE  (1)
+#define HARPY (2)
+#define GOLD  (3)
+#define ENEMY_TYPE  (4)
+//当たり判定時の区別
+#define PLAYER (0)
+#define ENEMY (1)
 
 //ゲームオブジェクト基底クラス
 class GameObject
@@ -14,6 +25,7 @@ protected:
 	bool hit;          //オブジェクトに当たり判定が残っているか
 	bool destroy;      //オブジェクトを壊したいか
 	int object_type;   //オブジェクトの種類
+	int create_type;   //生成したいオブジェクトの種類
 
 public:
 	GameObject();
@@ -35,11 +47,11 @@ public:
 	bool GetDestroy()const;
 	//オブジェクトサイズ取得
 	Vector2D GetBoxSize() const;
-
+	//オブジェクトの種類取得
 	int GetObjectType() const;
+	//生成したい敵の種類取得
+	int GetCreateType() const;
 	//位置情報変更処理
 	void SetLocation(const Vector2D& locaiton);
-
-	void SetObjectType(int object_type);
 };
 

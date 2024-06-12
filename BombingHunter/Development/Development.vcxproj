@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="Objects\Enemy\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Objects\Enemy\EnemyType\Hane.cpp" />
     <ClCompile Include="Objects\Enemy\EnemyType\Gold.cpp" />
     <ClCompile Include="Objects\Enemy\EnemyType\Harpy.cpp" />
@@ -145,7 +146,7 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resource\Images\Enemy\E_Bullet\1 %281%29.png" />
+    <Image Include="Resource\Images\Enemy\E_Bullet\1.png" />
     <Image Include="Resource\Images\Enemy\E_Bullet\eff1.png" />
     <Image Include="Resource\Images\Enemy\E_Bullet\eff2.png" />
     <Image Include="Resource\Images\Enemy\E_Bullet\eff3.png" />
@@ -208,6 +209,7 @@
     <Media Include="Resource\sounds\Stage\ポップ.wav" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Enemy\Bullet\EnemyBullet.h" />
     <ClInclude Include="Objects\Enemy\EnemyType\Hane.h" />
     <ClInclude Include="Objects\Enemy\EnemyType\Gold.h" />
     <ClInclude Include="Objects\Enemy\EnemyType\Harpy.h" />

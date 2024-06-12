@@ -4,6 +4,8 @@
 //コンストラクタ
 Gold::Gold()
 {
+	image_count = 0;
+
 	animation[0] = NULL;
 	animation[1] = NULL;
 	animation[2] = NULL;
@@ -32,14 +34,28 @@ void Gold::Initialize()
 		throw("ハコ敵の画像がありません\n");
 	}
 
-	//移動量
-	velocity.x = GetRand(1) + 2;
+	////0か1をランダムで取り
+	//出現するx座標・移動する向き・画像の向きを決める
+	int rand_loc = GetRand(1);
+
+	if (rand_loc == 0)
+	{
+		location.x = 0;
+		velocity.x = 4;
+		flip_flag = FALSE;
+	}
+	else
+	{
+		location.x = 640;
+		velocity.x = -4;
+		flip_flag = TRUE;
+	}
 
 	//向きの設定
 	radian = 0.0f;
 
 	//大きさの設定
-	box_size = 64.0f;
+	box_size = 24.0f;
 
 	//初期画像の設定
 	image = animation[3];
@@ -49,62 +65,45 @@ void Gold::Initialize()
 
 	//消したいかどうか
 	destroy = false;
-}
 
-//更新処理
-void Gold::Update()
-{
+	object_type = ENEMY;
 
-}
-
-//描画処理
-void Gold::Draw() const
-{
-
-}
-
-//終了時処理
-void Gold::Finalize()
-{
-
+	create_type = GOLD;
 }
 
 //当たり判定通知処理
 void Gold::OnHitCollision(GameObject* hit_object)
 {
-
+	hit = true;
 }
 
-//移動処理
-void Gold::Movement()
-{
 
-}
-
-//アニメーション制御
 void Gold::AnimeControl()
 {
-	//フレームカウントを加算する
+	//フレームカウントの加算
 	animation_count++;
 	if (hit == false)
 	{
-		//40フレーム目に達したら
-		if (animation_count >= 40)
+		//20フレームごとに画像の切り替え
+		if (animation_count >= 20)
 		{
-			//カウントのリセット
+			//フレームカウントのリセット
 			animation_count = 0;
-
-			//画像の切り替え
-			if (image == animation[3])
+			//読み込みたい画像配列の位置を加算
+			image_count++;
+			//画像配列の末尾を読み込んでいる場合一番最初に戻す
+			if (image == animation[4])
 			{
-				image = animation[4];
+				image = animation[0];
+				image_count = 0;
 			}
 			else
 			{
-				image = animation[3];
+				image = animation[image_count];
 			}
 		}
 	}
+	//ﾀﾋぬ演出
 	else
 	{
 		if (animation_count % 8 == 0)

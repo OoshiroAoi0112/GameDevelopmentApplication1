@@ -8,7 +8,8 @@ GameObject::GameObject() :
 	sound(0),
 	hit(false),
 	destroy(false),
-	object_type(0)
+	object_type(0),
+	create_type(5)
 {
 
 }
@@ -62,28 +63,32 @@ Vector2D GameObject::GetBoxSize() const
 	return this->box_size;
 }
 
+//オブジェクトの種類取得
 int GameObject::GetObjectType() const
 {
 	return object_type;
+}
+
+//生成したい敵の種類取得
+int GameObject::GetCreateType() const
+{
+	return create_type;
+}
+
+//ヒットした状態か取得
+bool GameObject::GetHit() const
+{
+	return hit;
+}
+
+//消したいかどうか取得
+bool GameObject::GetDestroy() const
+{
+	return destroy;
 }
 
 //位置情報設定処理
 void GameObject::SetLocation(const Vector2D& location)
 {
 	this->location = location;
-}
-
-void GameObject::SetObjectType(int object_type)
-{
-	this->object_type = object_type;
-}
-
-bool GameObject::GetHit() const
-{
-	return hit;
-}
-
-bool GameObject::GetDestroy() const
-{
-	return destroy;
 }

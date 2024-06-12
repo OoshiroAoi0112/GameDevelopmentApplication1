@@ -87,32 +87,15 @@ void Enemy::OnHitCollision(GameObject* hit_object)
 //移動処理
 void Enemy::Movement()
 {
-	////ハコ敵の高さ設定
-	//location.y = 480.0f-scale;
-
 	//現在の一座標に速さを加算する
 	location += velocity;
 
 	//
-	if (location.x > 640.0f-box_size.x || location.x < box_size.x)
+	if (location.x > 640.0f || location.x < 0.0f)
 	{
-		velocity.x = -velocity.x;
-		if (flip_flag == true)
-		{
-			flip_flag = false;
-		}
-		else
-		{
-			flip_flag = true;
-		}
+		//hit = true;
+		destroy = true;
 	}
-	
-	////
-	//if (location.x > 640.0f || location.x < 0.0f)
-	//{
-	//	//hit = true;
-	//	destroy = true;
-	//}
 }
 
 //アニメーション制御

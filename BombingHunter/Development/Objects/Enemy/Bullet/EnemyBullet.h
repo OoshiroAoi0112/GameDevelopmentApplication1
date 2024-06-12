@@ -2,25 +2,25 @@
 #include "../../GameObject.h"
 #include "../../Utility/Vector2D.h"
 
-class Bullet: public GameObject
+class EnemyBullet : public GameObject
 {
 private:
-	Vector2D speed;
+	Vector2D velocity;
 	int animation[4];
 	int animation_count;
 	bool anim_active;
 	int image_count;
 
 public:
-	Bullet();
-	~Bullet();
+	EnemyBullet();
+	~EnemyBullet();
 
-	void Initialize()override;
-	void Update()override;
+	void Initialize() override;
+	void Update() override;
 	void Draw()const override;
-	void Finalize()override;
+	void Finalize() override;
 
-	void OnHitCollision(GameObject* hit_object)override;
+	void OnHitCollision(GameObject* hit_object) override;
 
 public:
 	void Movement();
