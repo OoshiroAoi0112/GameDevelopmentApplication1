@@ -134,7 +134,7 @@
     <Image Include="Resource\Images\Stage\bg.png">
       <Filter>リソース ファイル</Filter>
     </Image>
-    <Image Include="Resource\Images\timer\timer-03.png">
+    <Image Include="Resource\Images\timer\timer.png">
       <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>
@@ -149,7 +149,7 @@
     <None Include="Resource\Images\number\8.svg" />
     <None Include="Resource\Images\number\9.svg" />
     <None Include="Resource\Images\number\7.svg" />
-    <None Include="Resource\Images\number\フライテキスト.sprite3" />
+    <None Include="Resource\Images\number\haifun.sprite3" />
     <None Include="Resource\Images\result\Finish.svg" />
     <None Include="Resource\Images\score\font-21.svg" />
     <None Include="Resource\Images\score\hs.svg" />

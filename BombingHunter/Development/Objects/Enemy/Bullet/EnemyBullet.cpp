@@ -140,6 +140,7 @@ void EnemyBullet::AnimeControl()
 
 void EnemyBullet::SetDirection(const Vector2D& dir)
 {
+	//(-（弾の初期位置ープレイヤーの位置）)/フレーム数;
 	Vector2D vec;
 	vec.x = ( - (location.x - dir.x))/60.0f;
 	velocity.x = vec.x;

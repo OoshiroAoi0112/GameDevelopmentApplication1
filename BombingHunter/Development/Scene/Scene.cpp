@@ -14,7 +14,15 @@
 Scene::Scene() :objects(),create_count(0)
 {
 	back_image = NULL;
-	destroy_number = 0;
+	time_image = NULL;
+	score_image = NULL;
+	hightscore_image = NULL;
+	for (int i = 0; i < 10; i++)
+	{
+		number[i] = NULL;
+	}
+
+
 	for (int i = 0; i < ENEMY_TYPE; i++)
 	{
 		create_enemy[i] = NULL;
@@ -34,12 +42,47 @@ void Scene::Initialize()
 {
 	//”wŒi‰æ‘œ“Ç‚Ýž‚Ý
 	back_image = LoadGraph("Resource/Images/Stage/bg.png");
+	time_image = LoadGraph("Resource/Images/timer/timer.png");
+	score_image = LoadGraph("Resource/Images/score/font-21.svg");
+	hightscore_image = LoadGraph("Resource/Images/score/hs.svg");
+
+	number[0] = LoadGraph("Resource/Images/number/0.svg");
+	number[1] = LoadGraph("Resource/Images/number/1.svg");
+	number[2] = LoadGraph("Resource/Images/number/2.svg");
+	number[3] = LoadGraph("Resource/Images/number/3.svg");
+	number[4] = LoadGraph("Resource/Images/number/4.svg");
+	number[5] = LoadGraph("Resource/Images/number/5.svg");
+	number[6] = LoadGraph("Resource/Images/number/6.svg");
+	number[7] = LoadGraph("Resource/Images/number/7.svg");
+	number[8] = LoadGraph("Resource/Images/number/8.svg");
+	number[9] = LoadGraph("Resource/Images/number/9.svg");
+	number[10] = LoadGraph("Resource/Images/number/haifun.sprite3");
 	
+
 	if (back_image == -1)
 	{
 		throw("”wŒi‰æ‘œ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
 	}
-
+	if (time_image == -1)
+	{
+		throw("”wŒi‰æ‘œ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+	}
+	if (score_image == -1)
+	{
+		throw("”wŒi‰æ‘œ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+	}
+	if (hightscore_image == -1)
+	{
+		throw("”wŒi‰æ‘œ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+	}
+	
+	for (int i=0; i < 10; i++)
+	{
+		if (number[i] == -1)
+		{
+			throw("”wŒi‰æ‘œ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+		}
+	}
 
 	create_enemy[HAKO] = 3;
 	create_enemy[HANE] = 3;
@@ -143,8 +186,6 @@ void Scene::Update()
 			}
 		}
 	}
-
-	destroy_number = 0;
 }
 
 //•`‰æˆ—

@@ -8,11 +8,13 @@ class Scene
 {
 private:
 	std::vector<GameObject*>objects;
-	std::vector<GameObject*>p_bullet;
-	int back_image;
-	int create_enemy[4];
-	int create_count;
-	int destroy_number;
+	int back_image;         //背景画像
+	int time_image;         //制限時間画像
+	int score_image;        //スコア文字画像
+	int hightscore_image;        //ハイスコア文字画像
+	int number[11];         //数字0～9
+	int create_enemy[4];    //敵の最大出現数配列
+	int create_count;       //生成する敵のカウント
 	class Player* player;
 public:
 	Scene();
