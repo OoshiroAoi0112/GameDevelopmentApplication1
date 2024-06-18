@@ -151,7 +151,7 @@
     <None Include="Resource\Images\number\7.svg" />
     <None Include="Resource\Images\number\haifun.sprite3" />
     <None Include="Resource\Images\result\Finish.svg" />
-    <None Include="Resource\Images\score\font-21.svg" />
+    <None Include="Resource\Images\score\score.svg" />
     <None Include="Resource\Images\score\hs.svg" />
     <None Include="Resource\sounds\Enemy\gold\金のテキ.sprite3" />
   </ItemGroup>

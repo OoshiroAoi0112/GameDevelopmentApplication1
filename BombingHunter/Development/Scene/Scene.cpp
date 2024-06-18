@@ -43,7 +43,7 @@ void Scene::Initialize()
 	//îwåiâÊëúì«Ç›çûÇ›
 	back_image = LoadGraph("Resource/Images/Stage/bg.png");
 	time_image = LoadGraph("Resource/Images/timer/timer.png");
-	score_image = LoadGraph("Resource/Images/score/font-21.svg");
+	score_image = LoadGraph("Resource/Images/score/score.svg");
 	hightscore_image = LoadGraph("Resource/Images/score/hs.svg");
 
 	number[0] = LoadGraph("Resource/Images/number/0.svg");
