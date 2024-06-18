@@ -15,6 +15,12 @@ Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false)
 	animation[2] = NULL;
 	animation[3] = NULL;
 	animation[4] = NULL;
+
+	init_enemy_y[0] = 180.0f;
+	init_enemy_y[1] = 230.0f;
+	init_enemy_y[2] = 280.0f;
+	init_enemy_y[3] = 330.0f;
+	init_enemy_y[4] = 380.0f;
 }
 
 //デストラクタ
@@ -51,8 +57,8 @@ void Enemy::Draw()const
 		//描画モードをアルファブレンドにする
 		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 255);
 	}
-	//プレイヤー画像の描画
-	DrawRotaGraphF(location.x, location.y, 0.7, radian, image, TRUE, flip_flag);
+	//エネミー画像の描画
+	DrawRotaGraphF(location.x, location.y, 0.6, radian, image, TRUE, flip_flag);
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL,0);
 
 	//デバッグ用
@@ -126,18 +132,17 @@ void Enemy::AnimeControl()
 	{
 		if (animation_count % 8 == 0)
 		{
-			location.x += 5.0f;
+			location.x += 10.0f;
 		}
 		else if (animation_count % 8 == 4)
 		{
-			location.x -= 5.0f;
+			location.x -= 10.0f;
 		}
 		location.y += 0.5f;
 		//敵の削除
 		if (animation_count >= 90)
 		{
 			destroy = true;
-			
 		}
 	}
 }

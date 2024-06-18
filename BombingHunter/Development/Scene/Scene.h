@@ -13,7 +13,7 @@ private:
 	int create_enemy[4];
 	int create_count;
 	int destroy_number;
-
+	class Player* player;
 public:
 	Scene();
 	~Scene();

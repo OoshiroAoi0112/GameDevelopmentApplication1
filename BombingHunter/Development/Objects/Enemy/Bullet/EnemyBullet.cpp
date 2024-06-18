@@ -1,4 +1,5 @@
 #include "EnemyBullet.h"
+#include "math.h"
 #include "DxLib.h"
 
 //コンストラクタ
@@ -37,13 +38,15 @@ void EnemyBullet::Initialize()
 			throw("敵の弾画像がないよ");
 		}
 	}
+	
+
 	//向きの設定
 	radian = 0;
 	//大きさの背一定
 	box_size = 20.0f;
 	//初期画像の設定
 	image = animation[image_count];  //animation[0]
-
+	//オブジェクトの種類
 	object_type = ENEMY;
 }
 
@@ -117,13 +120,12 @@ void EnemyBullet::AnimeControl()
 		switch (image_count)
 		{
 		case 0:
-		case 1:
-		case 3:
-			break;
 		case 2:
+			break;
+		case 1:
 			hit = true;
 			break;
-		case 4:
+		case 3:
 			anim_active = false;
 			destroy = true;
 			break;
@@ -134,4 +136,14 @@ void EnemyBullet::AnimeControl()
 	{
 		image = animation[image_count];
 	}
+}
+
+void EnemyBullet::SetDirection(const Vector2D& dir)
+{
+	Vector2D vec;
+	vec.x = ( - (location.x - dir.x))/60.0f;
+	velocity.x = vec.x;
+
+	vec.y = (-(location.y - dir.y))/60.0f;
+	velocity.y = vec.y;
 }

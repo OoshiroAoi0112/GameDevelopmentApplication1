@@ -6,6 +6,7 @@
 #include "../Objects/Enemy/EnemyType/Hane.h"
 #include "../Objects/Enemy/EnemyType/Harpy.h"
 #include "../Objects/Enemy/EnemyType/Gold.h"
+#include "../Objects/Enemy/Bullet/EnemyBullet.h"
 #include "../Utility/InputControl.h"
 #include "DxLib.h"
 
@@ -18,6 +19,7 @@ Scene::Scene() :objects(),create_count(0)
 	{
 		create_enemy[i] = NULL;
 	}
+	player = NULL;
 }
 
 //デストラクタ
@@ -45,7 +47,7 @@ void Scene::Initialize()
 	create_enemy[GOLD] = 1;
 
 	//プレイヤーを生成する
-	CreateObject<Player>(Vector2D(100.0f,100.0f));
+	player = CreateObject<Player>(Vector2D(320.0f, 50.0f));
 }
 
 //更新処理
@@ -65,7 +67,7 @@ void Scene::Update()
 			{
 				if (i == HAKO)
 				{
-					CreateObject<Hako>(Vector2D(0.0f,420.0f));
+					CreateObject<Hako>(Vector2D(0.0f,390.0f));
 				}
 				if (i == HANE)
 				{
@@ -77,7 +79,7 @@ void Scene::Update()
 				}
 				if (i == GOLD)
 				{
-					CreateObject<Gold>(Vector2D(0.0f, 420.0f));
+					CreateObject<Gold>(Vector2D(0.0f, 400.0f));
 				}
 				//CreateObject<Enemy>(gene, i); 
 				create_enemy[i] -= 1;
@@ -89,6 +91,20 @@ void Scene::Update()
 	if (InputControl::GetKeyDown(KEY_INPUT_F))
 	{
 		CreateObject<Bullet>(Vector2D(objects[0]->GetLocation()));
+	}
+
+	//一定間隔で敵が弾を打つ
+	for (int i=0;i<objects.size();i++)
+	{
+		if(objects[i]->GetObjectType() == ENEMY)
+		{
+			if (objects[i]->GetShotFlag() == true)
+			{
+				EnemyBullet* obj = CreateObject<EnemyBullet>(Vector2D(objects[i]->GetLocation()));
+				obj->SetDirection(player->GetLocation());
+				objects[i]->SetShotFlag();
+			}
+		}
 	}
 
 	//シーンに存在するオブジェクトの更新処理
@@ -108,7 +124,6 @@ void Scene::Update()
 			//当たり判定チェック処理
 			HitCheckObject(objects[i], objects[j]);
 		}
-		
 	}
 
 	//オブジェクトの削除

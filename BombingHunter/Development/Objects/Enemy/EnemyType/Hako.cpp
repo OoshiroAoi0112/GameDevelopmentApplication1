@@ -43,12 +43,14 @@ void Hako::Initialize()
 		velocity.x = -vec;
 		flip_flag = TRUE;
 	}
+
+	location.y = init_enemy_y[4];
 	
 	//向きの設定
 	radian = 0.0f;
 
 	//大きさの設定
-	box_size = 64.0f;
+	box_size =52.0f;
 
 	//初期画像の設定
 	image = animation[0];
@@ -64,6 +66,20 @@ void Hako::Initialize()
 
 	//生成したい敵の番号（名前）
 	create_type = HAKO;
+
+	shot_span = 60;
+}
+
+void Hako::Update()
+{
+	shot_count++;
+	if (shot_count >= shot_span)
+	{
+		shot_flag = true;
+		shot_count = 0;
+	}
+
+	__super::Update();
 }
 
 //当たり判定通知処理

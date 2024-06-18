@@ -44,12 +44,14 @@ void Hane::Initialize()
 		velocity.x = -vec;
 		flip_flag = TRUE;
 	}
+	rand_loc = GetRand(3);
+	location.y = init_enemy_y[rand_loc];
 
 	//Œü‚«‚Ìİ’è
 	radian = 0.0f;
 
 	//‘å‚«‚³‚Ìİ’è
-	box_size = 64.0f;
+	box_size = 52.0f;
 
 	//‰Šú‰æ‘œ‚Ìİ’è
 	image = animation[0];

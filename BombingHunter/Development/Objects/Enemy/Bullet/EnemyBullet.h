@@ -22,8 +22,11 @@ public:
 
 	void OnHitCollision(GameObject* hit_object) override;
 
-public:
+private:
 	void Movement();
 	void AnimeControl();
+
+public:
+	void SetDirection(const Vector2D& dir);
 };
 

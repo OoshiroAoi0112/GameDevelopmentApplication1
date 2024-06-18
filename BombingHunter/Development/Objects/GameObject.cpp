@@ -9,7 +9,10 @@ GameObject::GameObject() :
 	hit(false),
 	destroy(false),
 	object_type(0),
-	create_type(5)
+	create_type(5),
+	shot_count(0),
+	shot_span(0),
+	shot_flag(false)
 {
 
 }
@@ -87,8 +90,18 @@ bool GameObject::GetDestroy() const
 	return destroy;
 }
 
+bool GameObject::GetShotFlag() const
+{
+	return shot_flag;
+}
+
 //ˆÊ’uî•ñÝ’èˆ—
 void GameObject::SetLocation(const Vector2D& location)
 {
 	this->location = location;
+}
+
+void GameObject::SetShotFlag()
+{
+	this->shot_flag = false;
 }

@@ -18,8 +18,6 @@ Player::~Player()
 //初期化処理
 void Player::Initialize()
 {
-	location = (Vector2D(100.0f, 100.0f));
-
 	//画像の読み込み
 	animation[0] = LoadGraph("Resource/Images/Player/飛ぶ1.png");
 	animation[1] = LoadGraph("Resource/Images/Player/飛ぶ2.png");
@@ -62,7 +60,7 @@ void Player::Update()
 void Player::Draw()const
 {
 	//プレイヤー画像の描画
-	DrawRotaGraphF(location.x, location.y, 1.0, radian, image, TRUE, flip_flag);
+	DrawRotaGraphF(location.x, location.y, 0.6, radian, image, TRUE, flip_flag);
 	
 	//デバッグ用
 #if _DEBUG
@@ -113,30 +111,12 @@ void Player::Action()
 	{
 		velocity.x += 0.0f;
 	}
-	//左右移動
-	if (InputControl::GetKey(KEY_INPUT_UP))
-	{
-		velocity.y += -5.0f;
-	}
-	else if (InputControl::GetKey(KEY_INPUT_DOWN))
-	{
-		velocity.y += 5.0f;
-	}
-	else
-	{
-		velocity.y += 0.0f;
-	}
 
 	//画面端から出ないようにする
 	if (location.x+velocity.x<0 + box_size.x / 2 || location.x+velocity.x>640-box_size.x / 2)
 	{
 		velocity.x = 0;
 	}
-	if (location.y +velocity.y< 0 + box_size.y / 2 || location.y+velocity.y>480 - box_size.y / 2)
-	{
-		velocity.y = 0;
-	}
-
 
 	//現在の一座標に速さを加算する
 	location += velocity;
