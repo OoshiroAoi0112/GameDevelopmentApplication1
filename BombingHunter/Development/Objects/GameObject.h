@@ -10,7 +10,9 @@
 #define ENEMY_TYPE  (4)
 //当たり判定時の区別
 #define PLAYER (0)
-#define ENEMY (1)
+#define ENEMY  (1)
+#define BULLET (2)
+#define ENEMY_BULLET (3)
 
 //ゲームオブジェクト基底クラス
 class GameObject

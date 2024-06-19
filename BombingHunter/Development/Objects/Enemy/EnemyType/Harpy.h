@@ -9,7 +9,7 @@ public:
 
 	virtual void Initialize() override;
 
-	//“–‚½‚è”»’è’Ê’mˆ—
-	virtual void OnHitCollision(GameObject* hit_object) override;
+	////“–‚½‚è”»’è’Ê’mˆ—
+	//virtual void OnHitCollision(GameObject* hit_object) override;
 
 };

@@ -11,18 +11,23 @@
 #include "DxLib.h"
 
 //コンストラクタ
-Scene::Scene() :objects(),create_count(0)
+Scene::Scene() :objects(),create_count(0),score(0)
 {
+	//背景画像
 	back_image = NULL;
+	//タイマー画像
 	time_image = NULL;
+	//スコア文字画像
 	score_image = NULL;
+	//ハイスコア文字画像
 	hightscore_image = NULL;
+	//ハイフンを含めた数字画像
 	for (int i = 0; i < 10; i++)
 	{
 		number[i] = NULL;
 	}
 
-
+	//敵の種類ごとの最大数
 	for (int i = 0; i < ENEMY_TYPE; i++)
 	{
 		create_enemy[i] = NULL;
@@ -42,23 +47,26 @@ void Scene::Initialize()
 {
 	//背景画像読み込み
 	back_image = LoadGraph("Resource/Images/Stage/bg.png");
+	//タイマー画像
 	time_image = LoadGraph("Resource/Images/timer/timer.png");
-	score_image = LoadGraph("Resource/Images/score/score.svg");
-	hightscore_image = LoadGraph("Resource/Images/score/hs.svg");
-
-	number[0] = LoadGraph("Resource/Images/number/0.svg");
-	number[1] = LoadGraph("Resource/Images/number/1.svg");
-	number[2] = LoadGraph("Resource/Images/number/2.svg");
-	number[3] = LoadGraph("Resource/Images/number/3.svg");
-	number[4] = LoadGraph("Resource/Images/number/4.svg");
-	number[5] = LoadGraph("Resource/Images/number/5.svg");
-	number[6] = LoadGraph("Resource/Images/number/6.svg");
-	number[7] = LoadGraph("Resource/Images/number/7.svg");
-	number[8] = LoadGraph("Resource/Images/number/8.svg");
-	number[9] = LoadGraph("Resource/Images/number/9.svg");
-	number[10] = LoadGraph("Resource/Images/number/haifun.sprite3");
+	//スコア文字画像
+	score_image = LoadGraph("Resource/Images/score/score.png");
+	//ハイスコア文字画像
+	hightscore_image = LoadGraph("Resource/Images/score/hs.png");
+	//ハイフン含めた数字画像
+	number[0] = LoadGraph("Resource/Images/number/0.png");
+	number[1] = LoadGraph("Resource/Images/number/1.png");
+	number[2] = LoadGraph("Resource/Images/number/2.png");
+	number[3] = LoadGraph("Resource/Images/number/3.png");
+	number[4] = LoadGraph("Resource/Images/number/4.png");
+	number[5] = LoadGraph("Resource/Images/number/5.png");
+	number[6] = LoadGraph("Resource/Images/number/6.png");
+	number[7] = LoadGraph("Resource/Images/number/7.png");
+	number[8] = LoadGraph("Resource/Images/number/8.png");
+	number[9] = LoadGraph("Resource/Images/number/9.png");
+	number[10] = LoadGraph("Resource/Images/number/-.png");
 	
-
+	
 	if (back_image == -1)
 	{
 		throw("背景画像が見つかりません");
@@ -178,12 +186,8 @@ void Scene::Update()
 			{
 				int type = objects[i]->GetCreateType();
 				create_enemy[type]++;
-				objects.erase(objects.begin() + i--);
 			}
-			else
-			{
-				objects.erase(objects.begin() + i--);
-			}
+			objects.erase(objects.begin() + i--);
 		}
 	}
 }
@@ -193,6 +197,12 @@ void Scene::Draw()const
 {
 	//背景画像の描画
 	DrawExtendGraph(0, 0, 640, 480, back_image, FALSE);
+	//タイマー画像の描画
+	DrawRotaGraphF(30, 460, 0.7, 0, time_image, TRUE, TRUE);
+	//スコア文字画像の描画
+	DrawRotaGraphF(190, 460, 1.3, DX_PI_F, score_image, TRUE, TRUE, TRUE);
+	//ハイスコア文字画像の描画
+	DrawRotaGraphF(400, 460, 1.3, DX_PI_F, hightscore_image, TRUE, TRUE, TRUE);
 
 	//シーンに存在するオブジェクトの描画処理
 	for (GameObject* obj : objects)
@@ -234,8 +244,8 @@ void Scene::HitCheckObject(GameObject* a, GameObject* b)
 	//2つのオブジェクトの当たり判定の大きさを取得
 	Vector2D box_size = (a->GetBoxSize() + b->GetBoxSize()) / 2.0f;
 
-	if (a->GetObjectType() != b->GetObjectType())
-	{
+	//if (a->GetObjectType() != b->GetObjectType())
+	//{
 		//距離より大きさが大きい場合い、Hit判定とする
 		if ((fabsf(diff.x) < box_size.x) && (fabsf(diff.y) < box_size.y))
 		{
@@ -243,5 +253,5 @@ void Scene::HitCheckObject(GameObject* a, GameObject* b)
 			a->OnHitCollision(b);
 			b->OnHitCollision(a);
 		}
-	}
+	//}
 }

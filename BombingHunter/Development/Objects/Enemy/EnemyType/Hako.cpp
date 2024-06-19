@@ -67,6 +67,7 @@ void Hako::Initialize()
 	//生成したい敵の番号（名前）
 	create_type = HAKO;
 
+	//弾を撃つ間隔
 	shot_span = 60;
 }
 
@@ -82,8 +83,9 @@ void Hako::Update()
 	__super::Update();
 }
 
-//当たり判定通知処理
-void Hako::OnHitCollision(GameObject* hit_object)
-{
-	hit = true;
-}
+////当たり判定通知処理
+//void Hako::OnHitCollision(GameObject* hit_object)
+//{
+//	//hit = true;
+//	__super::Enemy::OnHitCollision(hit_object);
+//}

@@ -11,8 +11,8 @@ public:
 
 	virtual void Initialize() override;
 
-	//当たり判定通知処理
-	virtual void OnHitCollision(GameObject* hit_object) override;
+	////当たり判定通知処理
+	//virtual void OnHitCollision(GameObject* hit_object) override;
 
 	//アニメーション制御（金の敵のみアニメーションが違う）
 	virtual void AnimeControl() override;

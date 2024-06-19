@@ -8,7 +8,7 @@
 
 
 //コンストラクタ
-Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false)
+Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false),blend(250)
 {
 	animation[0] = NULL;
 	animation[1] = NULL;
@@ -55,7 +55,7 @@ void Enemy::Draw()const
 	if (hit == true)
 	{
 		//描画モードをアルファブレンドにする
-		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 255);
+		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, blend);
 	}
 	//エネミー画像の描画
 	DrawRotaGraphF(location.x, location.y, 0.6, radian, image, TRUE, flip_flag);
@@ -84,10 +84,15 @@ void Enemy::Finalize()
 //当たり判定通知処理
 void Enemy::OnHitCollision(GameObject* hit_object)
 {
-	//被弾したら動けなくする
-	hit = true;
-	animation_count = 0;
-	box_size = 0.0f;
+	int type = hit_object->GetObjectType();
+	
+	if (type == BULLET)
+	{
+		//被弾したら動けなくする
+		hit = true;
+		animation_count = 0;
+		box_size = 0.0f;
+	}
 }
 
 //移動処理
@@ -139,8 +144,10 @@ void Enemy::AnimeControl()
 			location.x -= 10.0f;
 		}
 		location.y += 0.5f;
+		blend = blend - 5;
+
 		//敵の削除
-		if (animation_count >= 90)
+		if (animation_count >= 80)
 		{
 			destroy = true;
 		}

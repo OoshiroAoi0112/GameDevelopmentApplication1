@@ -15,6 +15,7 @@ private:
 	int number[11];         //”š0`9
 	int create_enemy[4];    //“G‚ÌÅ‘åoŒ»””z—ñ
 	int create_count;       //¶¬‚·‚é“G‚ÌƒJƒEƒ“ƒg
+	int score;
 	class Player* player;
 public:
 	Scene();

@@ -70,9 +70,10 @@ void Hane::Initialize()
 }
 
 
-//“–‚½‚è”»’è’Ê’mˆ—
-void Hane::OnHitCollision(GameObject* hit_object)
-{
-	hit = true;
-}
+////“–‚½‚è”»’è’Ê’mˆ—
+//void Hane::OnHitCollision(GameObject* hit_object)
+//{
+//	//hit = true;
+//	__super::Enemy::OnHitCollision(hit_object);
+//}
 

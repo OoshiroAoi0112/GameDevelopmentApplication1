@@ -47,7 +47,7 @@ void EnemyBullet::Initialize()
 	//初期画像の設定
 	image = animation[image_count];  //animation[0]
 	//オブジェクトの種類
-	object_type = ENEMY;
+	object_type = ENEMY_BULLET;
 }
 
 //更新処理
@@ -92,11 +92,16 @@ void EnemyBullet::Finalize()
 //当たり判定通知処理
 void EnemyBullet::OnHitCollision(GameObject* hit_object)
 {
-	velocity = 0.0f;
-	image_count = 1;
-	anim_active = true;
-	hit = true;
-	box_size = 0.0f;
+	int type=hit_object->GetObjectType();
+
+	if (type == PLAYER)
+	{
+		velocity = 0.0f;
+		image_count = 1;
+		anim_active = true;
+		hit = true;
+		box_size = 0.0f;
+	}
 }
 
 //移動処理
@@ -142,9 +147,9 @@ void EnemyBullet::SetDirection(const Vector2D& dir)
 {
 	//(-（弾の初期位置ープレイヤーの位置）)/フレーム数;
 	Vector2D vec;
-	vec.x = ( - (location.x - dir.x))/60.0f;
+	vec.x = (-(location.x - dir.x)) / (60.0f + (location.y / 10));
 	velocity.x = vec.x;
 
-	vec.y = (-(location.y - dir.y))/60.0f;
+	vec.y = (-(location.y - dir.y))/ (60.0f + (location.x / 10));
 	velocity.y = vec.y;
 }

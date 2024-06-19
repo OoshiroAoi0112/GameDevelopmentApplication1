@@ -67,8 +67,10 @@ void Harpy::Initialize()
 	create_type = HARPY;
 }
 
-//“–‚½‚è”»’è’Ê’mˆ—
-void Harpy::OnHitCollision(GameObject* hit_object)
-{
-	hit = true;
-}
+////“–‚½‚è”»’è’Ê’mˆ—
+//void Harpy::OnHitCollision(GameObject* hit_object)
+//{
+//	//hit = true;
+//
+//	__super::Enemy::OnHitCollision(hit_object);
+//}

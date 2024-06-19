@@ -54,7 +54,7 @@ void Bullet::Initialize()
 	//初期画像の設定
 	image = animation[image_count];
 	//オブジェクトの種類
-	object_type = PLAYER;
+	object_type = BULLET;
 }
 
 //更新処理
@@ -99,13 +99,18 @@ void Bullet::Finalize()
 //当たり判定通知処理
 void Bullet::OnHitCollision(GameObject* hit_object)
 {
-	//当たったときの処理
-	speed = 0;
-	radian = 0;
-	image_count = 1;
-	anim_active = true;
-	hit = true;
-	box_size = 0.0f;
+	int type = hit_object->GetObjectType();
+	
+	if (type == ENEMY)
+	{
+		//当たったときの処理
+		speed = 0;
+		radian = 0;
+		image_count = 1;
+		anim_active = true;
+		hit = true;
+		box_size = 0.0f;
+	}
 }
 
 //移動処理

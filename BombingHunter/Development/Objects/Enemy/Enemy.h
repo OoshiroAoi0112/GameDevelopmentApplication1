@@ -10,6 +10,7 @@ protected:
 	int flip_flag;        //‰æ‘œ‚Ì”½“]”»’è
 	bool hit;             //“®‚¯‚éó‘Ô‚©i”í’e‚µ‚½‚©‚Ç‚¤‚©j
 	float init_enemy_y[5];
+	int blend;
 
 public:
 	Enemy();
