@@ -243,15 +243,12 @@ void Scene::HitCheckObject(GameObject* a, GameObject* b)
 
 	//2つのオブジェクトの当たり判定の大きさを取得
 	Vector2D box_size = (a->GetBoxSize() + b->GetBoxSize()) / 2.0f;
-
-	//if (a->GetObjectType() != b->GetObjectType())
-	//{
-		//距離より大きさが大きい場合い、Hit判定とする
-		if ((fabsf(diff.x) < box_size.x) && (fabsf(diff.y) < box_size.y))
-		{
-			//当たったことをオブジェクトに通知する
-			a->OnHitCollision(b);
-			b->OnHitCollision(a);
-		}
-	//}
+	
+	//距離より大きさが大きい場合い、Hit判定とする
+	if ((fabsf(diff.x) < box_size.x) && (fabsf(diff.y) < box_size.y))
+	{
+		//当たったことをオブジェクトに通知する
+		a->OnHitCollision(b);
+		b->OnHitCollision(a);
+	}
 }
