@@ -10,12 +10,14 @@ private:
 	std::vector<GameObject*>objects;
 	int back_image;         //背景画像
 	int time_image;         //制限時間画像
-	int score_image;        //スコア文字画像
-	int hightscore_image;        //ハイスコア文字画像
+	int s_str_image;        //スコア文字画像
+	int hs_str_image;        //ハイスコア文字画像
 	int number[11];         //数字0～9
 	int create_enemy[4];    //敵の最大出現数配列
 	int create_count;       //生成する敵のカウント
 	int score;
+	int s_digit;
+	int score_image;
 	class Player* player;
 public:
 	Scene();
@@ -59,4 +61,9 @@ private:
 		return new_instance;
 	}
 
+
+	void ScoreCal()
+	{
+
+	}
 };

@@ -123,7 +123,7 @@ void Bullet::Movement()
 	}
 	location+= speed;
 	
-	if (location.y >= 420)
+	if (location.y >= 400)
 	{
 		speed = 0;
 		radian = 0;

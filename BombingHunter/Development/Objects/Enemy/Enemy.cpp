@@ -8,19 +8,17 @@
 
 
 //コンストラクタ
-Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false),blend(250)
+Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false),blend(250), give_score(0)
 {
-	animation[0] = NULL;
-	animation[1] = NULL;
-	animation[2] = NULL;
-	animation[3] = NULL;
-	animation[4] = NULL;
-
-	init_enemy_y[0] = 180.0f;
-	init_enemy_y[1] = 230.0f;
-	init_enemy_y[2] = 280.0f;
-	init_enemy_y[3] = 330.0f;
-	init_enemy_y[4] = 380.0f;
+	for (int i = 0; i < 5; i++)
+	{
+		animation[i] = NULL;               //敵の画像（金敵のみ5枚）
+		init_enemy_y[i] = i * 50 + 180;    //敵が出現するy座標
+	}
+	score[HAKO] = 200;
+	score[HANE] = 30;
+	score[HARPY] = -100;
+	score[GOLD] = 1500;
 }
 
 //デストラクタ
@@ -92,6 +90,7 @@ void Enemy::OnHitCollision(GameObject* hit_object)
 		hit = true;
 		animation_count = 0;
 		box_size = 0.0f;
+		give_score = score[create_type];
 	}
 }
 
@@ -152,4 +151,10 @@ void Enemy::AnimeControl()
 			destroy = true;
 		}
 	}
+}
+
+
+int Enemy::GetGiveScore()
+{
+	return give_score;
 }

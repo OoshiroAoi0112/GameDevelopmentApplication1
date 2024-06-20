@@ -11,6 +11,8 @@ protected:
 	bool hit;             //“®‚¯‚éó‘Ô‚©i”í’e‚µ‚½‚©‚Ç‚¤‚©j
 	float init_enemy_y[5];
 	int blend;
+	int score[ENEMY_TYPE];
+	int give_score;
 
 public:
 	Enemy();
@@ -23,6 +25,8 @@ public:
 
 	//“–‚½‚è”»’è’Ê’mˆ—
 	virtual void OnHitCollision(GameObject* hit_object) override;
+
+	int GetGiveScore();
 
 private:
 	//ˆÚ“®ˆ—

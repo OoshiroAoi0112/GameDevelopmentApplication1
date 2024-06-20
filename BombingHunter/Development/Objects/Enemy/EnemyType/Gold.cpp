@@ -69,6 +69,8 @@ void Gold::Initialize()
 	object_type = ENEMY;
 
 	create_type = GOLD;
+
+	
 }
 
 ////“–‚½‚è”»’è’Ê’mˆ—

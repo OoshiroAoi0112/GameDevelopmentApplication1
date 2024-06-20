@@ -11,16 +11,16 @@
 #include "DxLib.h"
 
 //コンストラクタ
-Scene::Scene() :objects(),create_count(0),score(0)
+Scene::Scene() :objects(),create_count(0),score(0),s_digit(0)
 {
 	//背景画像
 	back_image = NULL;
 	//タイマー画像
 	time_image = NULL;
 	//スコア文字画像
-	score_image = NULL;
+	s_str_image = NULL;
 	//ハイスコア文字画像
-	hightscore_image = NULL;
+	hs_str_image = NULL;
 	//ハイフンを含めた数字画像
 	for (int i = 0; i < 10; i++)
 	{
@@ -50,9 +50,9 @@ void Scene::Initialize()
 	//タイマー画像
 	time_image = LoadGraph("Resource/Images/timer/timer.png");
 	//スコア文字画像
-	score_image = LoadGraph("Resource/Images/score/score.png");
+	s_str_image = LoadGraph("Resource/Images/score/score.png");
 	//ハイスコア文字画像
-	hightscore_image = LoadGraph("Resource/Images/score/hs.png");
+	hs_str_image = LoadGraph("Resource/Images/score/hs.png");
 	//ハイフン含めた数字画像
 	number[0] = LoadGraph("Resource/Images/number/0.png");
 	number[1] = LoadGraph("Resource/Images/number/1.png");
@@ -75,11 +75,11 @@ void Scene::Initialize()
 	{
 		throw("背景画像が見つかりません");
 	}
-	if (score_image == -1)
+	if (s_str_image == -1)
 	{
 		throw("背景画像が見つかりません");
 	}
-	if (hightscore_image == -1)
+	if (hs_str_image == -1)
 	{
 		throw("背景画像が見つかりません");
 	}
@@ -186,6 +186,8 @@ void Scene::Update()
 			{
 				int type = objects[i]->GetCreateType();
 				create_enemy[type]++;
+				Enemy* e=dynamic_cast<Enemy*>(objects[i]);
+				score+=e->GetGiveScore();
 			}
 			objects.erase(objects.begin() + i--);
 		}
@@ -200,9 +202,11 @@ void Scene::Draw()const
 	//タイマー画像の描画
 	DrawRotaGraphF(30, 460, 0.7, 0, time_image, TRUE, TRUE);
 	//スコア文字画像の描画
-	DrawRotaGraphF(190, 460, 1.3, DX_PI_F, score_image, TRUE, TRUE, TRUE);
+	DrawRotaGraphF(190, 460, 1.3, DX_PI_F, s_str_image, TRUE, TRUE, TRUE);
+
+	DrawFormatString(220, 460, GetColor(255, 255, 255), "%d", score);
 	//ハイスコア文字画像の描画
-	DrawRotaGraphF(400, 460, 1.3, DX_PI_F, hightscore_image, TRUE, TRUE, TRUE);
+	DrawRotaGraphF(400, 460, 1.3, DX_PI_F, hs_str_image, TRUE, TRUE, TRUE);
 
 	//シーンに存在するオブジェクトの描画処理
 	for (GameObject* obj : objects)
@@ -250,5 +254,15 @@ void Scene::HitCheckObject(GameObject* a, GameObject* b)
 		//当たったことをオブジェクトに通知する
 		a->OnHitCollision(b);
 		b->OnHitCollision(a);
+	}
+}
+
+
+void Scene::ScoreCal()
+{
+	if (score >= 10000)
+	{
+		s_digit = 4;
+		
 	}
 }
