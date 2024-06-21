@@ -9,6 +9,7 @@
 #include "../Objects/Enemy/Bullet/EnemyBullet.h"
 #include "../Utility/InputControl.h"
 #include "DxLib.h"
+#include <math.h>
 
 //コンストラクタ
 Scene::Scene() :objects(),create_count(0),score(0),s_digit(0)
@@ -24,7 +25,7 @@ Scene::Scene() :objects(),create_count(0),score(0),s_digit(0)
 	//ハイフンを含めた数字画像
 	for (int i = 0; i < 10; i++)
 	{
-		number[i] = NULL;
+		number_image[i] = NULL;
 	}
 
 	//敵の種類ごとの最大数
@@ -33,6 +34,12 @@ Scene::Scene() :objects(),create_count(0),score(0),s_digit(0)
 		create_enemy[i] = NULL;
 	}
 	player = NULL;
+
+	//
+	for (int i = 0; i < 5; i++)
+	{
+		score_image[i] = NULL;
+	}
 }
 
 //デストラクタ
@@ -54,17 +61,17 @@ void Scene::Initialize()
 	//ハイスコア文字画像
 	hs_str_image = LoadGraph("Resource/Images/score/hs.png");
 	//ハイフン含めた数字画像
-	number[0] = LoadGraph("Resource/Images/number/0.png");
-	number[1] = LoadGraph("Resource/Images/number/1.png");
-	number[2] = LoadGraph("Resource/Images/number/2.png");
-	number[3] = LoadGraph("Resource/Images/number/3.png");
-	number[4] = LoadGraph("Resource/Images/number/4.png");
-	number[5] = LoadGraph("Resource/Images/number/5.png");
-	number[6] = LoadGraph("Resource/Images/number/6.png");
-	number[7] = LoadGraph("Resource/Images/number/7.png");
-	number[8] = LoadGraph("Resource/Images/number/8.png");
-	number[9] = LoadGraph("Resource/Images/number/9.png");
-	number[10] = LoadGraph("Resource/Images/number/-.png");
+	number_image[0] = LoadGraph("Resource/Images/number/0.png");
+	number_image[1] = LoadGraph("Resource/Images/number/1.png");
+	number_image[2] = LoadGraph("Resource/Images/number/2.png");
+	number_image[3] = LoadGraph("Resource/Images/number/3.png");
+	number_image[4] = LoadGraph("Resource/Images/number/4.png");
+	number_image[5] = LoadGraph("Resource/Images/number/5.png");
+	number_image[6] = LoadGraph("Resource/Images/number/6.png");
+	number_image[7] = LoadGraph("Resource/Images/number/7.png");
+	number_image[8] = LoadGraph("Resource/Images/number/8.png");
+	number_image[9] = LoadGraph("Resource/Images/number/9.png");
+	number_image[10] = LoadGraph("Resource/Images/number/-.png");
 	
 	
 	if (back_image == -1)
@@ -86,7 +93,7 @@ void Scene::Initialize()
 	
 	for (int i=0; i < 10; i++)
 	{
-		if (number[i] == -1)
+		if (number_image[i] == -1)
 		{
 			throw("背景画像が見つかりません");
 		}
@@ -99,6 +106,8 @@ void Scene::Initialize()
 
 	//プレイヤーを生成する
 	player = CreateObject<Player>(Vector2D(320.0f, 50.0f));
+
+	score_image[0] = number_image[0];
 }
 
 //更新処理
@@ -188,10 +197,15 @@ void Scene::Update()
 				create_enemy[type]++;
 				Enemy* e=dynamic_cast<Enemy*>(objects[i]);
 				score+=e->GetGiveScore();
+				if (score <= 0)
+				{
+					score = 0;
+				}
 			}
 			objects.erase(objects.begin() + i--);
 		}
 	}
+	ScoreCal();
 }
 
 //描画処理
@@ -204,7 +218,13 @@ void Scene::Draw()const
 	//スコア文字画像の描画
 	DrawRotaGraphF(190, 460, 1.3, DX_PI_F, s_str_image, TRUE, TRUE, TRUE);
 
-	DrawFormatString(220, 460, GetColor(255, 255, 255), "%d", score);
+	for (int i = 0; i < s_digit; i++)
+	{
+		DrawRotaGraphF(i * 20 + 240, 460, 1.5, 0, score_image[i], TRUE, FALSE, FALSE);
+	}
+
+	DrawFormatString(50, 50, GetColor(0, 0,0), "%d", score);
+
 	//ハイスコア文字画像の描画
 	DrawRotaGraphF(400, 460, 1.3, DX_PI_F, hs_str_image, TRUE, TRUE, TRUE);
 
@@ -262,7 +282,45 @@ void Scene::ScoreCal()
 {
 	if (score >= 10000)
 	{
-		s_digit = 4;
-		
+		s_digit = 5;
 	}
+	else if (score >= 1000)
+	{
+		s_digit = 4;
+	}
+	else if (score >= 100)
+	{
+		s_digit = 3;
+	}
+	else if (score >= 10)
+	{
+		s_digit = 2;
+	}
+	else
+	{
+		s_digit = 1;
+	}
+
+	int s = score;
+	for (int i = 0; i < 5; i++)
+	{
+		if (i < s_digit)
+		{
+			int p = pow(10, s_digit-(i+1));
+			int image= s / p;
+			score_image[i] = GetNumberImage(image);
+			s = s % p;
+		}
+		else
+		{
+			score_image[i] = NULL;
+		}
+	}
+}
+
+
+//
+int Scene::GetNumberImage(int number)
+{
+	return number_image[number];
 }
