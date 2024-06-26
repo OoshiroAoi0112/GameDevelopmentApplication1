@@ -4,6 +4,7 @@
 #include "EnemyType/Harpy.h"
 #include "EnemyType/Gold.h"
 #include "../../Utility/InputControl.h"
+#include <math.h>
 #include "DxLib.h"
 
 
@@ -57,6 +58,7 @@ void Enemy::Draw()const
 	}
 	//エネミー画像の描画
 	DrawRotaGraphF(location.x, location.y, 0.6, radian, image, TRUE, flip_flag);
+	
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL,0);
 
 	//デバッグ用
@@ -152,7 +154,6 @@ void Enemy::AnimeControl()
 		}
 	}
 }
-
 
 int Enemy::GetGiveScore()
 {

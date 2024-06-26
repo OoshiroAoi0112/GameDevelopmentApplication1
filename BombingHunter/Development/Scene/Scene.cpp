@@ -12,12 +12,19 @@
 #include <math.h>
 
 //コンストラクタ
-Scene::Scene() :objects(),create_count(0),score(0),s_digit(0)
+Scene::Scene() :
+	objects(),
+	create_count(0),
+	score(0),
+	s_digit(0),
+	limit_time(60),
+	time_count(0),
+	t_digit(2)
 {
 	//背景画像
 	back_image = NULL;
 	//タイマー画像
-	time_image = NULL;
+	timer_image = NULL;
 	//スコア文字画像
 	s_str_image = NULL;
 	//ハイスコア文字画像
@@ -40,6 +47,8 @@ Scene::Scene() :objects(),create_count(0),score(0),s_digit(0)
 	{
 		score_image[i] = NULL;
 	}
+	time_image[0] = NULL;
+	time_image[1] = NULL;
 }
 
 //デストラクタ
@@ -55,7 +64,7 @@ void Scene::Initialize()
 	//背景画像読み込み
 	back_image = LoadGraph("Resource/Images/Stage/bg.png");
 	//タイマー画像
-	time_image = LoadGraph("Resource/Images/timer/timer.png");
+	timer_image = LoadGraph("Resource/Images/timer/timer.png");
 	//スコア文字画像
 	s_str_image = LoadGraph("Resource/Images/score/score.png");
 	//ハイスコア文字画像
@@ -73,12 +82,12 @@ void Scene::Initialize()
 	number_image[9] = LoadGraph("Resource/Images/number/9.png");
 	number_image[10] = LoadGraph("Resource/Images/number/-.png");
 	
-	
+	//エラーチェック
 	if (back_image == -1)
 	{
 		throw("背景画像が見つかりません");
 	}
-	if (time_image == -1)
+	if (timer_image == -1)
 	{
 		throw("背景画像が見つかりません");
 	}
@@ -99,6 +108,7 @@ void Scene::Initialize()
 		}
 	}
 
+	//敵の種類ごとの最大出現数
 	create_enemy[HAKO] = 3;
 	create_enemy[HANE] = 3;
 	create_enemy[HARPY] = 2;
@@ -107,7 +117,12 @@ void Scene::Initialize()
 	//プレイヤーを生成する
 	player = CreateObject<Player>(Vector2D(320.0f, 50.0f));
 
+	//スコアの初期画像"0"
 	score_image[0] = number_image[0];
+
+	//制限時間の初期画像"60"
+	time_image[0] = number_image[0];
+	
 }
 
 //更新処理
@@ -160,8 +175,11 @@ void Scene::Update()
 		{
 			if (objects[i]->GetShotFlag() == true)
 			{
+				//敵の弾を生成
 				EnemyBullet* obj = CreateObject<EnemyBullet>(Vector2D(objects[i]->GetLocation()));
+				//生成した弾の移動量決定
 				obj->SetDirection(player->GetLocation());
+				//shotflag を false にして撃てなくする
 				objects[i]->SetShotFlag();
 			}
 		}
@@ -205,6 +223,9 @@ void Scene::Update()
 			objects.erase(objects.begin() + i--);
 		}
 	}
+	//制限時間の計算と画像格納
+	TimeCal();
+	//スコアの画像格納
 	ScoreCal();
 }
 
@@ -214,16 +235,20 @@ void Scene::Draw()const
 	//背景画像の描画
 	DrawExtendGraph(0, 0, 640, 480, back_image, FALSE);
 	//タイマー画像の描画
-	DrawRotaGraphF(30, 460, 0.7, 0, time_image, TRUE, TRUE);
+	DrawRotaGraphF(30, 460, 0.7, 0, timer_image, TRUE, TRUE);
+	//残り時間の画像描画
+	for (int i = 0; i < t_digit; i++)
+	{
+		DrawRotaGraphF(i * 20 + 60, 460, 1.5, 0, time_image[i], TRUE, FALSE, FALSE);
+	}
+
 	//スコア文字画像の描画
 	DrawRotaGraphF(190, 460, 1.3, DX_PI_F, s_str_image, TRUE, TRUE, TRUE);
-
+	//スコアの画像描画
 	for (int i = 0; i < s_digit; i++)
 	{
 		DrawRotaGraphF(i * 20 + 240, 460, 1.5, 0, score_image[i], TRUE, FALSE, FALSE);
 	}
-
-	DrawFormatString(50, 50, GetColor(0, 0,0), "%d", score);
 
 	//ハイスコア文字画像の描画
 	DrawRotaGraphF(400, 460, 1.3, DX_PI_F, hs_str_image, TRUE, TRUE, TRUE);
@@ -277,7 +302,7 @@ void Scene::HitCheckObject(GameObject* a, GameObject* b)
 	}
 }
 
-
+//現在のスコアを上から一桁づつ取得し、その数字に対する画像を入れる。
 void Scene::ScoreCal()
 {
 	if (score >= 10000)
@@ -318,8 +343,47 @@ void Scene::ScoreCal()
 	}
 }
 
+void Scene::TimeCal()
+{
+	time_count++;
+	if (time_count >= 60)
+	{
+		time_count = 0;
+		limit_time--;
+		if (limit_time <= 0)
+		{
+			limit_time = 0;
+		}
+	}
 
-//
+	if (limit_time >= 10)
+	{
+		t_digit = 2;
+	}
+	else
+	{
+		t_digit = 1;
+	}
+
+	int t = limit_time;
+	for (int i = 0; i < t_digit; i++)
+	{
+		if (i < t_digit)
+		{
+			int p = pow(10, t_digit - (i + 1));
+			int image = t / p;
+			time_image[i] = GetNumberImage(image);
+			t = t % p;
+		}
+		else
+		{
+			time_image[i] = NULL;
+		}
+	}
+}
+
+
+//値に応じた数字の画像を返す
 int Scene::GetNumberImage(int number)
 {
 	return number_image[number];

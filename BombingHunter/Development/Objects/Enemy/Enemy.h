@@ -4,15 +4,15 @@
 class Enemy :public GameObject
 {
 protected:
-	Vector2D velocity;    //座標
-	int animation[5];     //描画画像
-	int animation_count;  //画像切り替えタイミング
-	int flip_flag;        //画像の反転判定
-	bool hit;             //動ける状態か（被弾したかどうか）
-	float init_enemy_y[5];
-	int blend;
-	int score[ENEMY_TYPE];
-	int give_score;
+	Vector2D velocity;       //座標
+	int animation[5];        //描画画像
+	int animation_count;     //画像切り替えタイミング
+	int flip_flag;           //画像の反転判定
+	bool hit;                //動ける状態か（被弾したかどうか）
+	float init_enemy_y[5];   //エネミーの初期座標（ｙ）
+	int blend;               //エネミーが徐々に透明になっていく値
+	int score[ENEMY_TYPE];   //エネミーが消えるときにシーンに渡すスコアの値（種類別）
+	int give_score;          //
 
 public:
 	Enemy();

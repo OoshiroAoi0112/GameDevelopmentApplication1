@@ -69,6 +69,8 @@ void Hako::Initialize()
 
 	//’e‚ðŒ‚‚ÂŠÔŠu
 	shot_span = 60;
+
+	__super::Initialize();
 }
 
 void Hako::Update()
