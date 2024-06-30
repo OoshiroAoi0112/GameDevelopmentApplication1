@@ -81,7 +81,7 @@ int GameObject::GetCreateType() const
 //ƒqƒbƒg‚µ‚½ó‘Ô‚©Žæ“¾
 bool GameObject::GetHit() const
 {
-	return hit;
+	return this->hit;
 }
 
 //Á‚µ‚½‚¢‚©‚Ç‚¤‚©Žæ“¾

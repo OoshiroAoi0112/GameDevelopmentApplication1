@@ -6,6 +6,7 @@
 #include "../Objects/Enemy/EnemyType/Hane.h"
 #include "../Objects/Enemy/EnemyType/Harpy.h"
 #include "../Objects/Enemy/EnemyType/Gold.h"
+#include "../Objects/Enemy/Enemy_Score.h"
 #include "../Objects/Enemy/Bullet/EnemyBullet.h"
 #include "../Utility/InputControl.h"
 #include "DxLib.h"
@@ -17,7 +18,7 @@ Scene::Scene() :
 	create_count(0),
 	score(0),
 	s_digit(0),
-	limit_time(60),
+	limit_time(5),
 	time_count(0),
 	t_digit(2)
 {
@@ -49,6 +50,10 @@ Scene::Scene() :
 	}
 	time_image[0] = NULL;
 	time_image[1] = NULL;
+	for (int i = 0; i < 4; i++)
+	{
+		result_image[i] = NULL;
+	}
 }
 
 //デストラクタ
@@ -81,6 +86,11 @@ void Scene::Initialize()
 	number_image[8] = LoadGraph("Resource/Images/number/8.png");
 	number_image[9] = LoadGraph("Resource/Images/number/9.png");
 	number_image[10] = LoadGraph("Resource/Images/number/-.png");
+
+	result_image[0] = LoadGraph("Resource/Images/result/BAD.png");
+	result_image[1] = LoadGraph("Resource/Images/result/OK.png");
+	result_image[2] = LoadGraph("Resource/Images/result/GOOD.png");
+	result_image[3] = LoadGraph("Resource/Images/result/Perfect.png");
 	
 	//エラーチェック
 	if (back_image == -1)
@@ -105,6 +115,14 @@ void Scene::Initialize()
 		if (number_image[i] == -1)
 		{
 			throw("背景画像が見つかりません");
+		}
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (result_image[i] == -1)
+		{
+			throw("評価画像が見つかりません");
 		}
 	}
 
@@ -144,7 +162,7 @@ void Scene::Update()
 				{
 					CreateObject<Hako>(Vector2D(0.0f,390.0f));
 				}
-				if (i == HANE)
+				if (i == HANE)	
 				{
 					CreateObject<Hane>(Vector2D(0.0f,300.0f));
 				}
@@ -163,9 +181,13 @@ void Scene::Update()
 	}
 
 	//Fを押すと弾を生成する
-	if (InputControl::GetKeyDown(KEY_INPUT_F))
+	if (InputControl::GetKeyDown(KEY_INPUT_SPACE))
 	{
-		CreateObject<Bullet>(Vector2D(objects[0]->GetLocation()));
+		if (player->shot_flag == true)
+		{
+			CreateObject<Bullet>(Vector2D(objects[0]->GetLocation()));
+			player->shot_flag = false;
+		}
 	}
 
 	//一定間隔で敵が弾を打つ
@@ -194,6 +216,34 @@ void Scene::Update()
 		}
 	}
 
+	//一定間隔で敵が弾を打つ
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (objects[i]->GetObjectType() == ENEMY)
+		{
+			if (objects[i]->GetHit() == true)
+			{
+				Vector2D loc = objects[i]->GetLocation();
+				Enemy* e = dynamic_cast<Enemy*>(objects[i]);
+				if (e->s_give == true)
+				{
+					score += e->GetGiveScore();
+					if (score <= 0)
+					{
+						score = 0;
+					}
+					e->s_give = false;
+				}
+				if (e->s_drow == true)
+				{
+					Enemy_Score* es = CreateObject<Enemy_Score>(Vector2D(loc));
+					es->SetScoreImage(e->GetGiveScore());
+					e->s_drow = false;
+				}
+			}
+		}
+	}
+
 	//オブジェクト同士の当たり判定チェック
 	for (int i = 0; i < objects.size(); i++)
 	{
@@ -213,12 +263,16 @@ void Scene::Update()
 			{
 				int type = objects[i]->GetCreateType();
 				create_enemy[type]++;
-				Enemy* e=dynamic_cast<Enemy*>(objects[i]);
+				/*Enemy* e=dynamic_cast<Enemy*>(objects[i]);
 				score+=e->GetGiveScore();
 				if (score <= 0)
 				{
 					score = 0;
-				}
+				}*/
+			}
+			if (objects[i]->GetObjectType() == BULLET)
+			{
+				player->shot_flag = true;
 			}
 			objects.erase(objects.begin() + i--);
 		}
@@ -261,6 +315,11 @@ void Scene::Draw()const
 		{
 			obj->Draw();
 		}
+	}
+
+	if (limit_time <= 0)
+	{
+		DrawRotaGraphF(320, 240, 0.7, 0, result_image[0], TRUE, FALSE, FALSE);
 	}
 }
 

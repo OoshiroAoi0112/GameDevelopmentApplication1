@@ -9,6 +9,8 @@ private:
 	int flip_flag;
 
 public:
+	bool shot_flag;
+
 	Player();
 	~Player();
 

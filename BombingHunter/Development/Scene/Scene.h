@@ -20,6 +20,7 @@ private:
 	int score;              //スコア
 	int s_digit;            //スコアの桁数
 	int score_image[5];     //スコアを一桁ずつ格納、それに応じた画像の格納
+	int result_image[4];    //スコアに応じた評価結果画像を格納
 
 	int limit_time;         //制限時間
 	int time_count;         //フレームをカウントして60毎に制限時間を１減らす

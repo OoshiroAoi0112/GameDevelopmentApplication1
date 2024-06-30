@@ -3,7 +3,7 @@
 #include "DxLib.h"
 
 //コンストラクタ
-Player::Player() :animation_count(0), flip_flag(FALSE)
+Player::Player() :animation_count(0), flip_flag(FALSE),shot_flag(true)
 {
 	animation[0] = NULL;
 	animation[1] = NULL;

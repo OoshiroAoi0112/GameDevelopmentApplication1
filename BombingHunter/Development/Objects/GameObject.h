@@ -13,6 +13,7 @@
 #define ENEMY  (1)
 #define BULLET (2)
 #define ENEMY_BULLET (3)
+#define NOHIT  (4)
 
 //ゲームオブジェクト基底クラス
 class GameObject

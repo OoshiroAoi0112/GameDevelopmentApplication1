@@ -9,7 +9,12 @@
 
 
 //コンストラクタ
-Enemy::Enemy() :animation_count(0), flip_flag(FALSE),hit(false),blend(250), give_score(0)
+Enemy::Enemy() :animation_count(0),
+flip_flag(FALSE),
+blend(250),
+give_score(0),
+s_drow(true),
+s_give(true)
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -77,8 +82,10 @@ void Enemy::Draw()const
 void Enemy::Finalize()
 {
 	//使用した画像を開放する
-	DeleteGraph(animation[0]);
-	DeleteGraph(animation[1]);
+	for (int i = 0; i < 5; i++)
+	{
+		DeleteGraph(animation[i]);
+	}
 }
 
 //当たり判定通知処理
