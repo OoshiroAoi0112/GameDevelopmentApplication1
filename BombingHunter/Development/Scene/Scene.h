@@ -77,4 +77,6 @@ private:
 	void TimeCal();
 
 	int GetNumberImage(int number);
+
+	void Result();
 };

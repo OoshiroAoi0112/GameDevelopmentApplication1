@@ -18,7 +18,7 @@ Scene::Scene() :
 	create_count(0),
 	score(0),
 	s_digit(0),
-	limit_time(5),
+	limit_time(0),
 	time_count(0),
 	t_digit(2)
 {
@@ -138,6 +138,8 @@ void Scene::Initialize()
 	//スコアの初期画像"0"
 	score_image[0] = number_image[0];
 
+	//制限時間の設定
+	limit_time = 5;
 	//制限時間の初期画像"60"
 	time_image[0] = number_image[0];
 	
@@ -146,141 +148,148 @@ void Scene::Initialize()
 //更新処理
 void Scene::Update()
 {
-	//敵を生成するためのカウント
-	create_count++;
-	//1秒に1種類ずつ敵を生成する
-	if (create_count >= 60)
+	if (limit_time > 0)
 	{
-		create_count = 0;
-		//敵の種類分だけループする
-		for (int i = 0; i < ENEMY_TYPE; i++)
+		//敵を生成するためのカウント
+		create_count++;
+		//1秒に1種類ずつ敵を生成する
+		if (create_count >= 60)
 		{
-			//敵の種類ごとの生成可能数が1以上であるかどうか
-			if (create_enemy[i] > 0)
+			create_count = 0;
+			//敵の種類分だけループする
+			for (int i = 0; i < ENEMY_TYPE; i++)
 			{
-				if (i == HAKO)
+				//敵の種類ごとの生成可能数が1以上であるかどうか
+				if (create_enemy[i] > 0)
 				{
-					CreateObject<Hako>(Vector2D(0.0f,390.0f));
+					if (i == HAKO)
+					{
+						CreateObject<Hako>(Vector2D(0.0f, 390.0f));
+					}
+					if (i == HANE)
+					{
+						CreateObject<Hane>(Vector2D(0.0f, 300.0f));
+					}
+					if (i == HARPY)
+					{
+						CreateObject<Harpy>(Vector2D(0.0f, 200.0f));
+					}
+					if (i == GOLD)
+					{
+						CreateObject<Gold>(Vector2D(0.0f, 400.0f));
+					}
+					//CreateObject<Enemy>(gene, i); 
+					create_enemy[i] -= 1;
 				}
-				if (i == HANE)	
-				{
-					CreateObject<Hane>(Vector2D(0.0f,300.0f));
-				}
-				if (i == HARPY)
-				{
-					CreateObject<Harpy>(Vector2D(0.0f,200.0f));
-				}
-				if (i == GOLD)
-				{
-					CreateObject<Gold>(Vector2D(0.0f, 400.0f));
-				}
-				//CreateObject<Enemy>(gene, i); 
-				create_enemy[i] -= 1;
 			}
 		}
-	}
 
-	//Fを押すと弾を生成する
-	if (InputControl::GetKeyDown(KEY_INPUT_SPACE))
-	{
-		if (player->shot_flag == true)
+		//Fを押すと弾を生成する
+		if (InputControl::GetKeyDown(KEY_INPUT_SPACE))
 		{
-			CreateObject<Bullet>(Vector2D(objects[0]->GetLocation()));
-			player->shot_flag = false;
-		}
-	}
-
-	//一定間隔で敵が弾を打つ
-	for (int i=0;i<objects.size();i++)
-	{
-		if(objects[i]->GetObjectType() == ENEMY)
-		{
-			if (objects[i]->GetShotFlag() == true)
+			if (player->shot_flag == true)
 			{
-				//敵の弾を生成
-				EnemyBullet* obj = CreateObject<EnemyBullet>(Vector2D(objects[i]->GetLocation()));
-				//生成した弾の移動量決定
-				obj->SetDirection(player->GetLocation());
-				//shotflag を false にして撃てなくする
-				objects[i]->SetShotFlag();
+				CreateObject<Bullet>(Vector2D(objects[0]->GetLocation()));
+				player->shot_flag = false;
 			}
 		}
-	}
 
-	//シーンに存在するオブジェクトの更新処理
-	for (GameObject* obj : objects)
-	{
-		if (obj->GetDestroy() == false)
+		//一定間隔で敵が弾を打つ
+		for (int i = 0; i < objects.size(); i++)
 		{
-			obj->Update();
-		}
-	}
-
-	//一定間隔で敵が弾を打つ
-	for (int i = 0; i < objects.size(); i++)
-	{
-		if (objects[i]->GetObjectType() == ENEMY)
-		{
-			if (objects[i]->GetHit() == true)
+			if (objects[i]->GetObjectType() == ENEMY)
 			{
-				Vector2D loc = objects[i]->GetLocation();
-				Enemy* e = dynamic_cast<Enemy*>(objects[i]);
-				if (e->s_give == true)
+				if (objects[i]->GetShotFlag() == true)
 				{
-					score += e->GetGiveScore();
+					//敵の弾を生成
+					EnemyBullet* obj = CreateObject<EnemyBullet>(Vector2D(objects[i]->GetLocation()));
+					//生成した弾の移動量決定
+					obj->SetDirection(player->GetLocation());
+					//shotflag を false にして撃てなくする
+					objects[i]->SetShotFlag();
+				}
+			}
+		}
+
+		//シーンに存在するオブジェクトの更新処理
+		for (GameObject* obj : objects)
+		{
+			if (obj->GetDestroy() == false)
+			{
+				obj->Update();
+			}
+		}
+
+		//一定間隔で敵が弾を打つ
+		for (int i = 0; i < objects.size(); i++)
+		{
+			if (objects[i]->GetObjectType() == ENEMY)
+			{
+				if (objects[i]->GetHit() == true)
+				{
+					Vector2D loc = objects[i]->GetLocation();
+					Enemy* e = dynamic_cast<Enemy*>(objects[i]);
+					if (e->s_give == true)
+					{
+						score += e->GetGiveScore();
+						if (score <= 0)
+						{
+							score = 0;
+						}
+						e->s_give = false;
+					}
+					if (e->s_drow == true)
+					{
+						Enemy_Score* es = CreateObject<Enemy_Score>(Vector2D(loc));
+						es->SetScoreImage(e->GetGiveScore());
+						e->s_drow = false;
+					}
+				}
+			}
+		}
+
+		//オブジェクト同士の当たり判定チェック
+		for (int i = 0; i < objects.size(); i++)
+		{
+			for (int j = i + 1; j < objects.size(); j++)
+			{
+				//当たり判定チェック処理
+				HitCheckObject(objects[i], objects[j]);
+			}
+		}
+
+		//オブジェクトの削除
+		for (int i = 0; i < objects.size(); i++)
+		{
+			if (objects[i]->GetDestroy())
+			{
+				if (objects[i]->GetCreateType() < ENEMY_TYPE)
+				{
+					int type = objects[i]->GetCreateType();
+					create_enemy[type]++;
+					/*Enemy* e=dynamic_cast<Enemy*>(objects[i]);
+					score+=e->GetGiveScore();
 					if (score <= 0)
 					{
 						score = 0;
-					}
-					e->s_give = false;
+					}*/
 				}
-				if (e->s_drow == true)
+				if (objects[i]->GetObjectType() == BULLET)
 				{
-					Enemy_Score* es = CreateObject<Enemy_Score>(Vector2D(loc));
-					es->SetScoreImage(e->GetGiveScore());
-					e->s_drow = false;
+					player->shot_flag = true;
 				}
+				objects.erase(objects.begin() + i--);
 			}
 		}
+		//制限時間の計算と画像格納
+		TimeCal();
+		//スコアの画像格納
+		ScoreCal();
 	}
-
-	//オブジェクト同士の当たり判定チェック
-	for (int i = 0; i < objects.size(); i++)
+	else
 	{
-		for (int j = i+1; j < objects.size(); j++)
-		{
-			//当たり判定チェック処理
-			HitCheckObject(objects[i], objects[j]);
-		}
+		
 	}
-
-	//オブジェクトの削除
-	for (int i = 0; i < objects.size(); i++)
-	{
-		if (objects[i]->GetDestroy())
-		{
-			if (objects[i]->GetCreateType() < ENEMY_TYPE)
-			{
-				int type = objects[i]->GetCreateType();
-				create_enemy[type]++;
-				/*Enemy* e=dynamic_cast<Enemy*>(objects[i]);
-				score+=e->GetGiveScore();
-				if (score <= 0)
-				{
-					score = 0;
-				}*/
-			}
-			if (objects[i]->GetObjectType() == BULLET)
-			{
-				player->shot_flag = true;
-			}
-			objects.erase(objects.begin() + i--);
-		}
-	}
-	//制限時間の計算と画像格納
-	TimeCal();
-	//スコアの画像格納
-	ScoreCal();
 }
 
 //描画処理
@@ -441,9 +450,13 @@ void Scene::TimeCal()
 	}
 }
 
-
 //値に応じた数字の画像を返す
 int Scene::GetNumberImage(int number)
 {
 	return number_image[number];
+}
+
+void Scene::Result()
+{
+	
 }
