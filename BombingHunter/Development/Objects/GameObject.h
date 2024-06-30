@@ -49,20 +49,28 @@ public:
 
 	//位置情報取得処理
 	Vector2D GetLocation() const;
+
 	//当たり判定の有無
 	bool GetHit()const;
+
 	//オブジェクトを消したいかどうか
 	bool GetDestroy()const;
+
 	//オブジェクトサイズ取得
 	Vector2D GetBoxSize() const;
+
 	//オブジェクトの種類取得
 	int GetObjectType() const;
+
 	//生成したい敵の種類取得
 	int GetCreateType() const;
+
 	//敵が球を打てる状態か取得
 	bool GetShotFlag() const;
+
 	//位置情報変更処理
 	void SetLocation(const Vector2D& locaiton);
+
 	//敵が攻撃できるか
 	void SetShotFlag();
 };

@@ -1,11 +1,13 @@
 #pragma once
 #include "../GameObject.h"
+#define BLEND_MAX (255) //透過値最大値
+#define IMAGE_MAX (5) //画像最大数
 
 class Enemy :public GameObject
 {
 protected:
 	Vector2D velocity;       //座標
-	int animation[5];        //描画画像
+	int animation[IMAGE_MAX];        //描画画像
 	int animation_count;     //画像切り替えタイミング
 	int flip_flag;           //画像の反転判定
 	float init_enemy_y[5];   //エネミーの初期座標（ｙ）

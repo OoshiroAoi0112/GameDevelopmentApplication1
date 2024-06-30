@@ -20,7 +20,8 @@ Scene::Scene() :
 	s_digit(0),
 	limit_time(0),
 	time_count(0),
-	t_digit(2)
+	t_digit(2),
+	result_anim_count(0)
 {
 	//背景画像
 	back_image = NULL;
@@ -50,10 +51,8 @@ Scene::Scene() :
 	}
 	time_image[0] = NULL;
 	time_image[1] = NULL;
-	for (int i = 0; i < 4; i++)
-	{
-		result_image[i] = NULL;
-	}
+	
+	result_image = NULL;
 }
 
 //デストラクタ
@@ -86,11 +85,6 @@ void Scene::Initialize()
 	number_image[8] = LoadGraph("Resource/Images/number/8.png");
 	number_image[9] = LoadGraph("Resource/Images/number/9.png");
 	number_image[10] = LoadGraph("Resource/Images/number/-.png");
-
-	result_image[0] = LoadGraph("Resource/Images/result/BAD.png");
-	result_image[1] = LoadGraph("Resource/Images/result/OK.png");
-	result_image[2] = LoadGraph("Resource/Images/result/GOOD.png");
-	result_image[3] = LoadGraph("Resource/Images/result/Perfect.png");
 	
 	//エラーチェック
 	if (back_image == -1)
@@ -118,14 +112,6 @@ void Scene::Initialize()
 		}
 	}
 
-	for (int i = 0; i < 4; i++)
-	{
-		if (result_image[i] == -1)
-		{
-			throw("評価画像が見つかりません");
-		}
-	}
-
 	//敵の種類ごとの最大出現数
 	create_enemy[HAKO] = 3;
 	create_enemy[HANE] = 3;
@@ -142,7 +128,6 @@ void Scene::Initialize()
 	limit_time = 5;
 	//制限時間の初期画像"60"
 	time_image[0] = number_image[0];
-	
 }
 
 //更新処理
@@ -288,7 +273,7 @@ void Scene::Update()
 	}
 	else
 	{
-		
+		Result();
 	}
 }
 
@@ -328,7 +313,7 @@ void Scene::Draw()const
 
 	if (limit_time <= 0)
 	{
-		DrawRotaGraphF(320, 240, 0.7, 0, result_image[0], TRUE, FALSE, FALSE);
+		DrawRotaGraphF(320, 240, 0.5, 0, result_image, TRUE, FALSE, FALSE);
 	}
 }
 
@@ -458,5 +443,29 @@ int Scene::GetNumberImage(int number)
 
 void Scene::Result()
 {
-	
+	result_anim_count++;
+	if (result_anim_count < 180)
+	{
+		result_image = LoadGraph("Resource/Images/result/Finish.png");
+	}
+	else
+	{
+		result_anim_count = 180;
+		if (score >= 3000)
+		{
+			result_image = LoadGraph("Resource/Images/result/Perfect.png");
+		}
+		else if (score >= 1500)
+		{
+			result_image = LoadGraph("Resource/Images/result/GOOD.png");
+		}
+		else if (score >= 1000)
+		{
+			result_image = LoadGraph("Resource/Images/result/OK.png");
+		}
+		else
+		{
+			result_image = LoadGraph("Resource/Images/result/BAD.png");
+		}
+	}
 }

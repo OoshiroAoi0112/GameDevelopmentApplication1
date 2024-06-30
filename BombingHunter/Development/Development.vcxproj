@@ -169,6 +169,7 @@
     <Image Include="Resource\Images\Player\飛ぶ1.png" />
     <Image Include="Resource\Images\Player\飛ぶ2.png" />
     <Image Include="Resource\Images\result\BAD.png" />
+    <Image Include="Resource\Images\result\Finish.png" />
     <Image Include="Resource\Images\result\GOOD.png" />
     <Image Include="Resource\Images\result\OK.png" />
     <Image Include="Resource\Images\result\Perfect.png" />

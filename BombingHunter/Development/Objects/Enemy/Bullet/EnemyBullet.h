@@ -8,7 +8,7 @@ private:
 	Vector2D velocity;
 	int animation[4];
 	int animation_count;
-	bool anim_active;
+	bool anim_active;      //爆発するアニメーションをするかしないか
 	int image_count;
 
 public:
@@ -27,6 +27,7 @@ private:
 	void AnimeControl();
 
 public:
+	//移動量を決める
 	void SetDirection(const Vector2D& dir);
 };
 

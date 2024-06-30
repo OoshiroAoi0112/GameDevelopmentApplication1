@@ -11,12 +11,12 @@
 //コンストラクタ
 Enemy::Enemy() :animation_count(0),
 flip_flag(FALSE),
-blend(250),
+blend(BLEND_MAX),
 give_score(0),
 s_drow(true),
 s_give(true)
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < IMAGE_MAX; i++)
 	{
 		animation[i] = NULL;               //敵の画像（金敵のみ5枚）
 		init_enemy_y[i] = i * 50 + 180;    //敵が出現するy座標
@@ -82,7 +82,7 @@ void Enemy::Draw()const
 void Enemy::Finalize()
 {
 	//使用した画像を開放する
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < IMAGE_MAX; i++)
 	{
 		DeleteGraph(animation[i]);
 	}

@@ -84,10 +84,3 @@ void Hako::Update()
 
 	__super::Update();
 }
-
-////“–‚½‚è”»’è’Ê’mˆ—
-//void Hako::OnHitCollision(GameObject* hit_object)
-//{
-//	//hit = true;
-//	__super::Enemy::OnHitCollision(hit_object);
-//}

@@ -68,12 +68,3 @@ void Hane::Initialize()
 	//生成したい敵の番号（名前）
 	create_type = HANE;
 }
-
-
-////当たり判定通知処理
-//void Hane::OnHitCollision(GameObject* hit_object)
-//{
-//	//hit = true;
-//	__super::Enemy::OnHitCollision(hit_object);
-//}
-

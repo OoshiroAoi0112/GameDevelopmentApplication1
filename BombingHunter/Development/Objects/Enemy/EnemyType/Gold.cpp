@@ -73,13 +73,6 @@ void Gold::Initialize()
 	
 }
 
-////“–‚½‚è”»’è’Ê’mˆ—
-//void Gold::OnHitCollision(GameObject* hit_object)
-//{
-//	//hit = true;
-//	__super::Enemy::OnHitCollision(hit_object);
-//}
-
 
 void Gold::AnimeControl()
 {

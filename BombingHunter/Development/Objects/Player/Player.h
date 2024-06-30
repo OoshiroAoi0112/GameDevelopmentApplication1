@@ -9,6 +9,7 @@ private:
 	int flip_flag;
 
 public:
+	//’e‚ðŒ‚‚Ä‚é‚©‘Å‚Ä‚È‚¢‚©
 	bool shot_flag;
 
 	Player();

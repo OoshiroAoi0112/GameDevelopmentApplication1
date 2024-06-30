@@ -5,7 +5,7 @@
 //コンストラクタ
 Bullet::Bullet() :speed(0.0f),animation_count(0),anim_active(false),image_count(0)
 {
-	for (int i=0; i < 4; i++)
+	for (int i=0; i < IMAGE_MAX; i++)
 	{
 		animation[i] = NULL;
 	}
@@ -27,7 +27,7 @@ void Bullet::Initialize()
 	animation[3] = LoadGraph("Resource/Images/Player/P_Bullet/3.png");
 
 	//エラーチェック
-	for (int i=0; i < 4; i++)
+	for (int i=0; i < IMAGE_MAX; i++)
 	{
 		if (animation[i] == -1)
 		{
@@ -90,7 +90,7 @@ void Bullet::Draw()const
 void Bullet::Finalize()
 {
 	//使用した画像を解放する
-	for (int i=0; i < 4; i++)
+	for (int i=0; i < IMAGE_MAX; i++)
 	{
 		DeleteGraph(animation[i]);
 	}

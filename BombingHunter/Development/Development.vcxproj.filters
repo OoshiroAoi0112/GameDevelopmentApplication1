@@ -140,6 +140,9 @@
     <Image Include="Resource\Images\timer\timer.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="Resource\Images\result\Finish.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\Images\number\0.svg" />

@@ -53,6 +53,7 @@ void EnemyBullet::Initialize()
 //更新処理
 void EnemyBullet::Update()
 {
+	//ヒット状態じゃないならなら移動して、ヒットしたなら爆発のアニメーションを行う
 	if (hit == false)
 	{
 		Movement();
@@ -92,6 +93,7 @@ void EnemyBullet::Finalize()
 //当たり判定通知処理
 void EnemyBullet::OnHitCollision(GameObject* hit_object)
 {
+	//オブジェクトの種類を取得してそれに応じて当たり判定を行うか決める
 	int type=hit_object->GetObjectType();
 
 	if (type == PLAYER)
@@ -145,7 +147,6 @@ void EnemyBullet::AnimeControl()
 
 void EnemyBullet::SetDirection(const Vector2D& dir)
 {
-	//(-（弾の初期位置ープレイヤーの位置）)/フレーム数;
 	Vector2D vec;
 	vec.x = (-(location.x - dir.x)) / (60.0f + (location.y / 10));
 	velocity.x = vec.x;

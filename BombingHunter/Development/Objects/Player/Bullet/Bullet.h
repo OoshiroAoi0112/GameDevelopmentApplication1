@@ -1,12 +1,13 @@
 #pragma once
 #include "../../GameObject.h"
 #include "../../Utility/Vector2D.h"
+#define IMAGE_MAX (4) //‰æ‘œÅ‘å”
 
 class Bullet: public GameObject
 {
 private:
 	Vector2D speed;
-	int animation[4];
+	int animation[IMAGE_MAX];
 	int animation_count;
 	bool anim_active;
 	int image_count;
