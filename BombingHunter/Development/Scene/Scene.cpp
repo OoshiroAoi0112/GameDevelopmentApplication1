@@ -125,7 +125,7 @@ void Scene::Initialize()
 	score_image[0] = number_image[0];
 
 	//§ŒÀŠÔ‚Ìİ’è
-	limit_time = 5;
+	limit_time = 60;
 	//§ŒÀŠÔ‚Ì‰Šú‰æ‘œ"60"
 	time_image[0] = number_image[0];
 }
