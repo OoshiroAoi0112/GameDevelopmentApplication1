@@ -5,17 +5,17 @@
 
 enum eEnemyState   //敵の行動状態
 {
-	TUISEKI,  //追跡
-	NAWABARI, //縄張り
-	IJIKE,    //いじけ
-	DIE,      //死
-	WAIT,     //待機
+	E_TUISEKI,  //追跡
+	E_NAWABARI, //縄張り
+	E_IJIKE,    //いじけ
+	E_DIE,      //死
+	E_WAIT,     //待機
 };
 
 enum eEnemyName   //敵の名前
 {
 	AKABE,   //アカベー
-	PINKEY,  //ピンキー
+	PINKY,  //ピンキー
 	AOSUKE,  //アオスケ
 	GUZUTA,  //グズタ
 };
@@ -32,10 +32,14 @@ public:
 	};
 
 protected:
-	Vector2D nawabari_loc;  //縄張りの位置
-	eEnemyState state;      //行動状態
-	float speed;            //足の速さ
-	Player* player;         //プレイヤー情報
+	Vector2D nawabari_loc;     //縄張りの位置
+	eEnemyState state;         //行動状態
+	eEnemyName name;           //敵の名前
+	eEnemyDirection dirction;  //敵の移動方向
+	float speed;               //足の速さ
+	Player* player;            //プレイヤー情報
+	int eye;                  //体の画像
+	float wait_time;           //待機時間
 
 private:
 	Vector2D spawn_loc;              //スタート・リスポーン位置
@@ -44,7 +48,7 @@ private:
 	int flash_count;    //点滅回数
 	bool gate;          //ゲート・ワープの範囲内か(範囲内:true,範囲外:false)
 	float mode_time;    //各状態の時間
-	float anim_count;   //アニメーションカウント
+	float anim_time;   //アニメーションカウント
 
 
 public:
@@ -57,7 +61,7 @@ public:
 	void Finalize()override;                       //終了処理
 	void OnHitCollision(GameObjectBase*)override;  //Hit処理
 
-	eEnemyState GetEnemyState(); //敵の状態取得処理
+	eEnemyState GetEnemyState() const; //敵の状態取得処理
 	void SetPlayer(Player*);     //プレイヤーの情報を変数に入れる
 
 protected:
@@ -70,6 +74,6 @@ private:
 	void Die(float);       //死
 	void Wait(float);      //待機状態
 
-	void AnimControl();    //アニメーション処理
-	void ChangeMode();     //状態の切り替え
+	void AnimControl(float);    //アニメーション処理
+	void ChangeMode(float);     //状態の切り替え
 };
