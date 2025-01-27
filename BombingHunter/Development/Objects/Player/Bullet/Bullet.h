@@ -1,6 +1,6 @@
 #pragma once
 #include "../../GameObject.h"
-#include "../../Utility/Vector2D.h"
+#include "../../../Utility/Vector2D.h"
 #define IMAGE_MAX (4) //‰æ‘œÅ‘å”
 
 class Bullet: public GameObject

@@ -20,26 +20,32 @@ enum eEnemyName   //敵の名前
 	GUZUTA,  //グズタ
 };
 
+/// <summary>
+/// エネミークラス（モンスター）
+/// </summary>
 class EnemyBase : public GameObject
 {
 public:
 	enum eEnemyDirection   //敵の移動方向
 	{
 		UP,     //上
-		LEFT,   //左
+		RIGHT,   //右
 		DOWN,   //下
-		RIGHT,  //右
+		LEFT,  //左
 	};
 
 protected:
 	Vector2D nawabari_loc;     //縄張りの位置
 	eEnemyState state;         //行動状態
 	eEnemyName name;           //敵の名前
-	eEnemyDirection dirction;  //敵の移動方向
+	eEnemyDirection direction;  //敵の移動方向
+	Vector2D velocity;
 	float speed;               //足の速さ
 	Player* player;            //プレイヤー情報
-	int eye;                  //体の画像
+	int eye;                   //体の画像
 	float wait_time;           //待機時間
+	int branch_panel_x;        //一つ前に使ったブランチパネルx
+	int branch_panel_y;        //一つ前に使ったブランチパネルy
 
 private:
 	Vector2D spawn_loc;              //スタート・リスポーン位置
@@ -63,6 +69,7 @@ public:
 
 	eEnemyState GetEnemyState() const; //敵の状態取得処理
 	void SetPlayer(Player*);     //プレイヤーの情報を変数に入れる
+	void SetName();
 
 protected:
 	virtual void Tuiseki(float);  //追跡状態
@@ -73,7 +80,9 @@ private:
 	void Ijike(float);     //いじけ状態
 	void Die(float);       //死
 	void Wait(float);      //待機状態
+	//const std::vector<eEnemyDirection>& Aster(std::vector<eEnemyDirection>&, std::vector<int>&, std::vector<int>&, const Vector2D&, eEnemyDirection);
 
+	void SetDirection(Vector2D);  //移動方向変更処理
 	void AnimControl(float);    //アニメーション処理
 	void ChangeMode(float);     //状態の切り替え
 };

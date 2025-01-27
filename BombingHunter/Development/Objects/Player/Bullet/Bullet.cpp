@@ -1,6 +1,6 @@
 #include "Bullet.h"
 #include "DxLib.h"
-#include "../../Utility/InputControl.h"
+#include "../../../Utility/InputControl.h"
 
 //コンストラクタ
 Bullet::Bullet() :speed(0.0f),animation_count(0),anim_active(false),image_count(0)
